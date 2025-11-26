@@ -22,15 +22,15 @@ class DatabaseSeeder extends Seeder
         \App\Models\Member::create(['name' => 'Alice']);
         \App\Models\Member::create(['name' => 'Bob']);
 
-        \App\Models\Room::create(['nama' => 'Room A']);
-        \App\Models\Room::create(['nama' => 'Room B']);
+        // \App\Models\Room::create(['nama' => 'Room A', 'tipe' => 'A', 'harga_per_3_bulan' => 100000]);
+        // \App\Models\Room::create(['nama' => 'Room B', 'tipe' => 'B', 'harga_per_3_bulan' => 200000]);
 
-        \App\Models\Booking::create([
-            'start_date' => '2025-10-01',
-            'end_date' => '2025-11-01',
-            'member_id' => 1,
-            'room_id' => 1,
-        ]);
+        // \App\Models\Booking::create([
+        //     'start_date' => '2025-10-01',
+        //     'end_date' => '2025-11-01',
+        //     'member_id' => 1,
+        //     'room_id' => 1,
+        // ]);
 
     }
 }

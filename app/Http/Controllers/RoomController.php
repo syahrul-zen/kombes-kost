@@ -12,6 +12,7 @@ class RoomController extends Controller
      */
     public function index()
     {
+
         return view('Admin.Room.index', [
             'rooms' => Room::all(),
         ]);
@@ -30,7 +31,30 @@ class RoomController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validated = $request->validate([
+            'nama' => 'required|unique:rooms|max:100',
+            'tipe' => 'required',
+            'harga_per_3_bulan' => 'required|numeric',
+            'gambar_sampul' => 'required|max:2000',
+            'deskripsi' => 'max:1000'
+        ]);
+
+
+        $gambar = $request->file('gambar_sampul');
+
+        $rename = uniqid() . '_' . $gambar->getClientOriginalName();
+
+        $validated['gambar_sampul'] = $rename;
+
+        $locationFile = 'File';
+
+        Room::create($validated);
+
+        $gambar->move($locationFile, $rename);
+
+        return redirect('/room')->with('success', 'Berhasil menambahkan data kamar');
+        
     }
 
     /**

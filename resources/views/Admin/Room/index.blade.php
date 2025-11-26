@@ -1,6 +1,6 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -9,7 +9,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Cetak Surat Masuk</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url("dashboard/suratmasuks/cetak") }}" method="POST">
+                <form action="{{ url('dashboard/suratmasuks/cetak') }}" method="POST">
                     <div class="modal-body">
 
                         @csrf
@@ -31,9 +31,9 @@
         <h4 class="mb-2"><i class="bi bi-envelope"></i> Daftar Kamar</h4>
 
         {{-- Session Message --}}
-        @if (session()->has("success"))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session("success") }}
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -45,7 +45,7 @@
 
                     <div class="d-flex justify-content-between">
                         <div class="d-flex gap-3">
-                            <a href="{{ url("room/create") }} " class="btn btn-primary mb-3"><i
+                            <a href="{{ url('room/create') }} " class="btn btn-primary mb-3"><i
                                     class="bi bi-plus-circle me-2"></i></i>Tambah</a>
 
                             <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
@@ -66,13 +66,13 @@
                         @foreach ($rooms as $room)
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
-                                <td>{{ $room->name }}</td>
+                                <td>{{ $room->nama }}</td>
                                 <td>
                                     <a href="{{ url("room/$room->id/edit") }}" class="btn btn-warning"><i
                                             class="bi bi-pencil-square"></i></a>
 
                                     <form action="{{ url("room/$room->id") }}" method="POST" class="d-inline">
-                                        @method("DELETE")
+                                        @method('DELETE')
                                         @csrf
                                         <button class="btn btn-danger"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i

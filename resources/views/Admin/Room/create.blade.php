@@ -1,72 +1,76 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <div class="row g-4">
         <div class="col-sm-12">
             <div class="bg-light h-100 rounded p-4">
                 <h6 class="mb-4">Tambah Data Kamar Kos</h6>
+
+
+
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+
+                        <ul>
+
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+
+                        </ul>
+
+                    </div>
+                @endif
+
+
                 {{-- PENTING: Tambahkan enctype="multipart/form-data" untuk upload file --}}
-                <form action="{{ url("dashboard/kamar") }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('room') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     {{-- Row 1: Nama dan Tipe Kamar --}}
                     <div class="row">
                         <div class="col-lg-6 mb-3">
                             <label for="nama-kamar" class="form-label">Nama Kamar <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error("nama") is-invalid @enderror" name="nama"
-                                value="{{ old("nama") }}" id="nama-kamar" autocomplete="off" required>
-                            @error("nama")
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                value="{{ old('nama') }}" id="nama-kamar" autocomplete="off" required>
+                            @error('nama')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-lg-6 mb-3">
                             <label for="tipe-kamar" class="form-label">Tipe Kamar <span class="text-danger">*</span></label>
-                            <select class="form-select @error("tipe") is-invalid @enderror" name="tipe" id="tipe-kamar"
+                            <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe-kamar"
                                 required>
                                 <option value="" selected disabled>Pilih Tipe</option>
-                                @foreach (["Standar", "AC", "Kamar Mandi Dalam"] as $tipe)
-                                    <option value="{{ $tipe }}" {{ old("tipe") == $tipe ? "selected" : "" }}>
+                                @foreach (['A', 'B', 'C'] as $tipe)
+                                    <option value="{{ $tipe }}" {{ old('tipe') == $tipe ? 'selected' : '' }}>
                                         {{ $tipe }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error("tipe")
+                            @error('tipe')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
-                    {{-- Row 2: Harga 6 Bulan dan Harga 12 Bulan (Type Number) --}}
+                    {{-- Row 2: Harga 3 Bulan  --}}
                     <div class="row">
                         <div class="col-lg-6 mb-3">
-                            <label for="harga-6-bulan" class="form-label">Harga Sewa (6 Bulan) <span
+                            <label for="harga-3-bulan" class="form-label">Harga Sewa Per (3 Bulan) <span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control @error("harga_6_bulan") is-invalid @enderror"
-                                name="harga_6_bulan" value="{{ old("harga_6_bulan") }}" id="harga-6-bulan" min="0"
-                                required>
-                            @error("harga_6_bulan")
+                            <input type="number" class="form-control @error('harga_per_3_bulan') is-invalid @enderror"
+                                name="harga_per_3_bulan" value="{{ old('harga_per_3_bulan') }}" id="harga-3-bulan"
+                                min="0" required>
+                            @error('harga_per_3_bulan')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="col-lg-6 mb-3">
-                            <label for="harga-12-bulan" class="form-label">Harga Sewa (12 Bulan) <span
-                                    class="text-danger">*</span></label>
-                            <input type="number" class="form-control @error("harga_12_bulan") is-invalid @enderror"
-                                name="harga_12_bulan" value="{{ old("harga_12_bulan") }}" id="harga-12-bulan" min="0"
-                                required>
-                            @error("harga_12_bulan")
-                                <div class="invalid-feedback text-red">{{ $message }}</div>
-                            @enderror
-                        </div>
-                    </div>
-
-                    {{-- Row 3: Foto dan Deskripsi --}}
-                    <div class="row">
-                        <div class="col-lg-6 mb-3">
-                            <label for="foto_kamar" class="form-label">Foto Kamar (Maks. 2MB)</label>
-                            <input class="form-control @error("foto_kamar") is-invalid @enderror" type="file"
-                                name="foto_kamar" id="foto_kamar" onchange="previewImage()">
-                            @error("foto_kamar")
+                            <label for="gambar_sampul" class="form-label">Foto Kamar (Maks. 2MB)</label>
+                            <input class="form-control @error('gambar_sampul') is-invalid @enderror" type="file"
+                                name="gambar_sampul" id="gambar_sampul" onchange="previewImage()">
+                            @error('gambar_sampul')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
 
@@ -75,18 +79,21 @@
                                 <img class="img-preview img-fluid" style="max-height: 200px; display: none;">
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-lg-6 mb-3">
+                    {{-- Row 3: Foto dan Deskripsi --}}
+                    <div class="row">
+                        <div class="col-lg-12 mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi Kamar</label>
-                            <textarea class="form-control @error("deskripsi") is-invalid @enderror" name="deskripsi" id="deskripsi" rows="5">{{ old("deskripsi") }}</textarea>
-                            @error("deskripsi")
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" rows="5">{{ old('deskripsi') }}</textarea>
+                            @error('deskripsi')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     {{-- Tombol Aksi --}}
-                    <a href="{{ url("dashboard/kamar") }}" class="btn btn-warning me-2">Batal</a>
+                    <a href="{{ url('dashboard/kamar') }}" class="btn btn-warning me-2">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan Data Kamar</button>
                 </form>
             </div>
@@ -96,7 +103,7 @@
     {{-- Script untuk Preview Gambar --}}
     <script>
         function previewImage() {
-            const image = document.querySelector('#foto_kamar');
+            const image = document.querySelector('#gambar_sampul');
             const imgPreview = document.querySelector('.img-preview');
 
             // Tampilkan elemen preview
