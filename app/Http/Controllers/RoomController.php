@@ -118,4 +118,11 @@ class RoomController extends Controller
 
         return redirect('/room')->with('success', 'Berhasil menghapus data kamar');
     }
+
+    public function viewA()
+    {
+        return view('Member.view-a', [
+            'rooms' => Room::all(),
+        ]);
+    }
 }

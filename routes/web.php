@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::resource('room', RoomController::class);
 Route::resource('member', MemberController::class);
@@ -49,6 +49,14 @@ Route::get('/admin', function () {
     return view('Admin.Layouts.main');
 });
 
-Route::get('/', function() {
+Route::get('/', function () {
     return view('Member.home');
+});
+
+Route::controller(RoomController::class)->group(function () {
+    Route::get('view-a', 'viewA');
+});
+
+Route::get('/booking', function () {
+    return view('Member.booking');
 });
