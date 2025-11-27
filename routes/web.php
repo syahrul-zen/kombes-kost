@@ -48,3 +48,7 @@ Route::get('/test', function () {
 Route::get('/admin', function () {
     return view('Admin.Layouts.main');
 });
+
+Route::get('/', function() {
+    return view('Member.home');
+});
