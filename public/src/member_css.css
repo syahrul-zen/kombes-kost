@@ -956,3 +956,277 @@
       object-fit: cover; /* Memastikan gambar menutupi area tanpa terdistorsi */
     }   
 /* End Booking */
+
+
+
+/* Profile Page */
+/* Profile Header */
+        .profile-header {
+            background: linear-gradient(135deg, var(--pink-primary) 0%, var(--pink-dark) 100%);
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+        }
+
+        .profile-info h3 {
+            color: var(--pink-dark);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-info p {
+            color: var(--text-light);
+            margin-bottom: 0;
+        }
+
+        .btn-pink {
+            background: var(--pink-primary);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-pink:hover {
+            background: var(--pink-dark);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        .btn-outline-pink {
+            border: 2px solid var(--pink-primary);
+            color: var(--pink-primary);
+            background: transparent;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-pink:hover {
+            background: var(--pink-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Stats Cards */
+        .stats-section {
+            padding: 40px 0;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.2);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--pink-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.5rem;
+            color: var(--pink-primary);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--pink-dark);
+            margin-bottom: 5px;
+        }
+
+        /* Booking History */
+        .booking-section {
+            padding: 40px 0;
+            background: white;
+        }
+
+        .section-title {
+            color: var(--pink-dark);
+            font-weight: bold;
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--pink-primary);
+        }
+
+        .booking-card {
+            background: white;
+            border: 2px solid var(--pink-light);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .booking-card:hover {
+            border-color: var(--pink-primary);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.1);
+        }
+
+        .booking-status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-completed {
+            background: #cce5ff;
+            color: #004085;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .booking-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+
+        .booking-details h5 {
+            color: var(--pink-dark);
+            margin-bottom: 10px;
+        }
+
+        .booking-details p {
+            margin-bottom: 5px;
+            color: var(--text-light);
+        }
+
+        /* Tabs */
+        .nav-tabs .nav-link {
+            color: var(--text-light);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-right: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-tabs .nav-link:hover {
+            background: var(--pink-light);
+            color: var(--pink-primary);
+        }
+
+        .nav-tabs .nav-link.active {
+            background: var(--pink-primary);
+            color: white;
+        }
+
+        .nav-tabs {
+            border-bottom: none;
+        }
+
+        /* Edit Profile Modal */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .modal-header {
+            background: var(--pink-primary);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border: none;
+        }
+
+        .form-control, .form-select {
+            border: 2px solid var(--pink-light);
+            border-radius: 10px;
+            padding: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--pink-primary);
+            box-shadow: 0 0 0 0.2rem rgba(255, 105, 180, 0.25);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-header {
+                padding: 40px 0;
+            }
+            
+            .profile-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .booking-image {
+                width: 80px;
+                height: 80px;
+            }
+        }
+/* End Profile Page */

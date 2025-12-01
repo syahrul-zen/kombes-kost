@@ -19,7 +19,8 @@ return new class extends Migration
 
             $table->integer('total_harga');
             $table->enum('status_pembayaran', ['pending', 'success'])->default('pending');
-            $table->enum('status_booking', ['pending', 'confirmed', 'check_in', 'check_out']);
+            $table->enum('status_booking', ['pending', 'confirmed', 'check_in', 'check_out'])->default('pending');
+            $table->string('bukti_pembayaran')->nullable();
 
             $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');

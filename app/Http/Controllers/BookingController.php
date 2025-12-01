@@ -64,14 +64,16 @@ class BookingController extends Controller
         //
     }
 
-    public function prevBooking(Room $room) {
+    public function prevBooking(Room $room)
+    {
 
         return view('Member.booking', [
-            'room' => $room->load('booking.member')
+            'room' => $room->load('booking.member'),
         ]);
     }
 
-    public function booking(Request $request) {
+    public function booking(Request $request)
+    {
 
         $data = $request->all();
 
@@ -81,36 +83,64 @@ class BookingController extends Controller
             'harga_per_3_bulan' => 'required',
             'member_id' => 'required',
             'room_id' => ['required', 'exists:rooms,id',
-                function($attribute, $value, $fail) use ($data) {
+                function ($attribute, $value, $fail) use ($data) {
 
-                    $lamaSewa = ' ' . ($data['paket_sewa'] * 30) . ' days';
+                    $lamaSewa = ' '.($data['paket_sewa'] * 30).' days';
 
-                    $endDate =  date('Y-m-d', strtotime($data['start_date']. $lamaSewa));
+                    $endDate = date('Y-m-d', strtotime($data['start_date'].$lamaSewa));
 
                     $tabrakan = Booking::where('room_id', $data['room_id'])
-                    ->where('start_date', '<=', $endDate)
-                    ->where('end_date', '>=', $data['start_date'])
-                    ->count();
+                        ->where('start_date', '<=', $endDate)
+                        ->where('end_date', '>=', $data['start_date'])
+                        ->count();
 
                     if ($tabrakan > 0) {
-                        $fail('Jadwal anda '. date('d-M-Y', strtotime($data['start_date'])) . ' Hingga ' . date('d-M-Y', strtotime($endDate)) . ', bertabrakan dengan jadwal pesanan lain, periksa kembali jadwal yang ada dibawah!');
+                        $fail('Jadwal anda '.date('d-M-Y', strtotime($data['start_date'])).' Hingga '.date('d-M-Y', strtotime($endDate)).', bertabrakan dengan jadwal pesanan lain, periksa kembali jadwal yang ada dibawah!');
                     }
-                }
-            ]
+                },
+            ],
         ]);
 
         $validated['start_date'] = $request['start_date'];
 
-        $lamaSewa = ' ' . ($request['paket_sewa'] * 30) . ' days';
+        $lamaSewa = ' '.($request['paket_sewa'] * 30).' days';
 
-        $validated['end_date'] =  date('Y-m-d', strtotime($validated['start_date']. $lamaSewa));
+        $validated['end_date'] = date('Y-m-d', strtotime($validated['start_date'].$lamaSewa));
 
         $validated['room_id'] = $request['room_id'];
         $validated['member_id'] = $request['member_id'];
         $validated['total_harga'] = ($request->paket_sewa / 3) * $request['harga_per_3_bulan'];
 
-        Booking::create($validated);
+        $booking = Booking::create($validated);
 
-        return "Berhasil booking";
+        return redirect('detail/'.$booking->id)->with('success', 'Kamar berhasil dipesan, silakan lakukan pembayaran dan unggah bukti pembayaran untuk konfirmasi.');
+    }
+
+    public function detail(Booking $booking)
+    {
+
+        return view('Member.detail', [
+            'booking' => $booking->load('room', 'member'),
+        ]);
+    }
+
+    public function uploadPembayaran(Request $request, Booking $booking)
+    {
+
+        $request->validate([
+            'bukti_pembayaran' => 'required|image|max:2048',
+        ]);
+
+        $file = $request->file('bukti_pembayaran');
+
+        $renameFile = uniqid().'_'.$file->getClientOriginalName();
+        $locationFile = 'File';
+        $file->move($locationFile, $renameFile);
+
+        $booking->bukti_pembayaran = $renameFile;
+
+        $booking->save();
+
+        return back()->with('success', 'Bukti pembayaran berhasil diunggah. Silakan tunggu konfirmasi dari admin.');
     }
 }

@@ -27,6 +27,21 @@
         </div>
     </div>
 
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Tampilan Penuh Foto Kamar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    {{-- Gambar ini akan diperbarui oleh JavaScript --}}
+                    <img id="fullImageDisplay" src="" class="img-fluid" alt="Foto Kamar Penuh">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-12">
         <h4 class="mb-2"><i class="bi bi-house-door"></i> Daftar Kamar</h4>
 
@@ -112,7 +127,7 @@
 @endsection
 
 {{-- **Tambahkan kode Modal ini di bagian akhir file Blade Anda** --}}
-@include("Admin.Components.image_modal")
+{{-- @include("Admin.Components.image_modal") --}}
 
 {{-- Script untuk mengatur tampilan gambar pada modal --}}
 

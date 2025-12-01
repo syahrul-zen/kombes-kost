@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('no_wa')->unique();
             // $table->string('foto');
             $table->enum('status', ['pelajar(siswa)', 'mahasiswa', 'bekerja', 'dll']);
+            $table->string('foto');
             $table->string('email')->unique();
             $table->string('password');
             $table->timestamps();

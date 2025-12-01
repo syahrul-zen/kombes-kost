@@ -6,7 +6,6 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
-use PharIo\Manifest\AuthorCollection;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +27,7 @@ Route::resource('member', MemberController::class);
 // Route::resource('booking', BookingController::class);
 
 // Route::get('/booking/{bookingg}', [BookingController::class, 'prevBooking']);
-Route::controller(BookingController::class)->group(function() {
+Route::controller(BookingController::class)->group(function () {
     Route::get('/show-room/{room}', 'prevBooking');
     Route::post('/booking', 'booking');
 });
@@ -71,22 +70,27 @@ Route::get('/booking', function () {
 
 Route::get('/register', [MemberController::class, 'create']);
 
-Route::controller(AuthController::class)->group(function() {
+Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'login');
     Route::post('/login', 'authenticate');
     Route::post('/register', 'register');
     Route::post('/logout', 'logout');
 });
 
-Route::get("/test1",function() {
+Route::get('/test1', function () {
     return Auth::guard('admin')->user();
 });
 
-Route::get("/test2",function() {
+Route::get('/test2', function () {
     return Auth::guard('member')->user();
 });
 
-Route::get('detail', function() {
-    return view('Member.payment');
-});
+Route::get('detail/{booking}', [BookingController::class, 'detail']);
 
+// Route::get('/profile', function () {
+//     return view('Member.profile');
+// });
+
+Route::get('/profile', [MemberController::class, 'profile']);
+
+Route::post('/upload-pembayaran/{booking}', [BookingController::class, 'uploadPembayaran']);

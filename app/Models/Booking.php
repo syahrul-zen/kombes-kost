@@ -19,7 +19,13 @@ class Booking extends Model
         'room_id',
     ];
 
-    public function member() {
+    public function member()
+    {
         return $this->belongsTo(Member::class);
+    }
+
+    public function room()
+    {
+        return $this->belongsTo(Room::class);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Member;
 use Illuminate\Http\Request;
+use illuminate\Support\Facades\Auth;
 
 class MemberController extends Controller
 {
@@ -29,17 +30,16 @@ class MemberController extends Controller
     public function store(Request $request)
     {
         // $validated = $request->validate([
-        //     'nama_lengkap' => 'required|max:200', 
-        //     'alamat' => 'required|max:200', 
-        //     'no_wa' => 'required|max:20|unique:members', 
-        //     'email' => 'required|max:100|email:dns|unique:admin|unique:members', 
+        //     'nama_lengkap' => 'required|max:200',
+        //     'alamat' => 'required|max:200',
+        //     'no_wa' => 'required|max:20|unique:members',
+        //     'email' => 'required|max:100|email:dns|unique:admin|unique:members',
         //     'password' => 'required|max:20'
         // ]);
 
         // Member::create($validated);
 
-
-        // return redirect('/login')->with('success', 'Berhasil registrasi dengan email ' . $validated['email'] . ', silahkan login');   
+        // return redirect('/login')->with('success', 'Berhasil registrasi dengan email ' . $validated['email'] . ', silahkan login');
     }
 
     /**
@@ -72,5 +72,13 @@ class MemberController extends Controller
     public function destroy(Member $member)
     {
         //
+    }
+
+    public function profile()
+    {
+
+        $data = Auth::guard('member')->user();
+
+        return view('Member.profile', ['member' => $data]);
     }
 }
