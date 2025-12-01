@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
             $table->string('nama')->unique();
-            $table->string('tipe');
+            $table->enum('tipe', ['A', 'B', 'C']);
             $table->integer('harga_per_3_bulan');
             // $table->integer('harga_per_tahun');
             $table->string('gambar_sampul');
+            $table->string('gambar_2')->nullable();
+            $table->string('gambar_3')->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

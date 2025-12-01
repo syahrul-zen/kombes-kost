@@ -36,10 +36,20 @@ return [
     */
 
     'guards' => [
-        'web' => [
-            'driver' => 'session',
-            'provider' => 'users',
-        ],
+        // 'web' => [
+        //     'driver' => 'session',
+        //     'provider' => 'users',
+        // ],
+
+        'member' => [
+            'driver' => 'session', 
+            'provider' => 'member'
+        ], 
+        
+        'admin' => [
+            'driver' => 'session', 
+            'provider' => 'admin'
+        ]
     ],
 
     /*
@@ -60,15 +70,20 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
         // ],
+
+        'member' => [
+            'driver' => 'eloquent', 
+            'model' => App\Models\Member::class
+        ], 
+
+        'admin' => [
+            'driver' => 'eloquent', 
+            'model' => App\Models\User::class
+        ]
     ],
 
     /*

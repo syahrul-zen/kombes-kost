@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RoomController;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
+use PharIo\Manifest\AuthorCollection;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +25,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('room', RoomController::class);
 Route::resource('member', MemberController::class);
-Route::resource('booking', BookingController::class);
+// Route::resource('booking', BookingController::class);
+
+// Route::get('/booking/{bookingg}', [BookingController::class, 'prevBooking']);
+Route::controller(BookingController::class)->group(function() {
+    Route::get('/show-room/{room}', 'prevBooking');
+    Route::post('/booking', 'booking');
+});
 
 Route::get('/test', function () {
     // Data dari input form anda :
@@ -60,3 +68,25 @@ Route::controller(RoomController::class)->group(function () {
 Route::get('/booking', function () {
     return view('Member.booking');
 });
+
+Route::get('/register', [MemberController::class, 'create']);
+
+Route::controller(AuthController::class)->group(function() {
+    Route::get('/login', 'login');
+    Route::post('/login', 'authenticate');
+    Route::post('/register', 'register');
+    Route::post('/logout', 'logout');
+});
+
+Route::get("/test1",function() {
+    return Auth::guard('admin')->user();
+});
+
+Route::get("/test2",function() {
+    return Auth::guard('member')->user();
+});
+
+Route::get('detail', function() {
+    return view('Member.payment');
+});
+

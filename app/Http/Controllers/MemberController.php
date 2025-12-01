@@ -20,7 +20,7 @@ class MemberController extends Controller
      */
     public function create()
     {
-        //
+        return view('Auth.register');
     }
 
     /**
@@ -28,7 +28,18 @@ class MemberController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $validated = $request->validate([
+        //     'nama_lengkap' => 'required|max:200', 
+        //     'alamat' => 'required|max:200', 
+        //     'no_wa' => 'required|max:20|unique:members', 
+        //     'email' => 'required|max:100|email:dns|unique:admin|unique:members', 
+        //     'password' => 'required|max:20'
+        // ]);
+
+        // Member::create($validated);
+
+
+        // return redirect('/login')->with('success', 'Berhasil registrasi dengan email ' . $validated['email'] . ', silahkan login');   
     }
 
     /**

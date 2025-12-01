@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -61,5 +62,55 @@ class BookingController extends Controller
     public function destroy(Booking $booking)
     {
         //
+    }
+
+    public function prevBooking(Room $room) {
+
+        return view('Member.booking', [
+            'room' => $room->load('booking.member')
+        ]);
+    }
+
+    public function booking(Request $request) {
+
+        $data = $request->all();
+
+        $request->validate([
+            'start_date' => 'required',
+            'paket_sewa' => 'required',
+            'harga_per_3_bulan' => 'required',
+            'member_id' => 'required',
+            'room_id' => ['required', 'exists:rooms,id',
+                function($attribute, $value, $fail) use ($data) {
+
+                    $lamaSewa = ' ' . ($data['paket_sewa'] * 30) . ' days';
+
+                    $endDate =  date('Y-m-d', strtotime($data['start_date']. $lamaSewa));
+
+                    $tabrakan = Booking::where('room_id', $data['room_id'])
+                    ->where('start_date', '<=', $endDate)
+                    ->where('end_date', '>=', $data['start_date'])
+                    ->count();
+
+                    if ($tabrakan > 0) {
+                        $fail('Jadwal anda '. date('d-M-Y', strtotime($data['start_date'])) . ' Hingga ' . date('d-M-Y', strtotime($endDate)) . ', bertabrakan dengan jadwal pesanan lain, periksa kembali jadwal yang ada dibawah!');
+                    }
+                }
+            ]
+        ]);
+
+        $validated['start_date'] = $request['start_date'];
+
+        $lamaSewa = ' ' . ($request['paket_sewa'] * 30) . ' days';
+
+        $validated['end_date'] =  date('Y-m-d', strtotime($validated['start_date']. $lamaSewa));
+
+        $validated['room_id'] = $request['room_id'];
+        $validated['member_id'] = $request['member_id'];
+        $validated['total_harga'] = ($request->paket_sewa / 3) * $request['harga_per_3_bulan'];
+
+        Booking::create($validated);
+
+        return "Berhasil booking";
     }
 }

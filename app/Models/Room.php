@@ -18,4 +18,8 @@ class Room extends Model
         'gambar_sampul',
         'deskripsi'
     ];
+
+    public function booking() {
+        return $this->hasMany(Booking::class);
+    }
 }

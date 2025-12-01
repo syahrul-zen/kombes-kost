@@ -416,27 +416,67 @@
 
                 <br>
 
-                <h1><i class="bi bi-person-plus-fill"></i> Login</h1>
-                {{-- <p>Bergabunglah dengan Pink Residence dan nikmati kemudahan menyewa kost</p> --}}
+                <h1><i class="bi bi-person-plus-fill"></i> Registrasi Member</h1>
+                <p>Bergabunglah dengan Pink Residence dan nikmati kemudahan menyewa kost</p>
             </div>
 
             <div class="registration-body">
+                <div class="success-message" id="successMessage">
+                    <i class="bi bi-check-circle-fill"></i> Pendaftaran berhasil! Silakan cek email untuk verifikasi
+                    akun Anda.
+                </div>
 
-                @if (session()->has('success'))
-                    <div class="alert alert-success" role="alert">
-                        {{ session('success') }}
+                <form>
+                    <!-- Nama Lengkap -->
+                    <div class="form-group">
+                        <label for="nama" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap"
+                            value="{{ @old('nama_lengkap') }}" placeholder="Masukkan nama lengkap Anda">
+                        @error('nama_lengkap')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                @endif
 
-                @if (session()->has('loginError'))
-                    <div class="alert alert-danger" role="alert">
-                        {{ session('loginError') }}
+                    <!-- Alamat -->
+                    <div class="form-group">
+                        <label for="alamat" class="form-label">Alamat <span class="text-danger">*</span></label>
+                        <textarea class="form-control" id="alamat" name="alamat" rows="3" placeholder="Masukkan alamat lengkap Anda"
+                            required>{{ @old('alamat') }}</textarea>
+                        @error('alamat')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
                     </div>
-                @endif
+
+                    <div class="form-group">
+                        <label for="status" class="form-label">Status Member <span
+                                class="text-danger">*</span></label>
+                        <select class="form-select" name="status" required>
+                            <option value="" selected disabled>Pilih Status Member</option>
+                            <option value="pelajar(siswa)" @selected(@old('status') === 'pelajar(siswa)')>Pelajar (Siswa)</option>
+                            <option value="mahasiswa" @selected(@old('status') === 'mahasiswa')>Mahasiswa</option>
+                            <option value="bekerja" @selected(@old('status') === 'bekerja')>Bekerja</option>
+                            <option value="dll" @selected(@old('status') === 'dll')>Dll</option>
+                        </select>
+                        <div class="invalid-feedback">Silakan pilih status member</div>
+                    </div>
 
 
-                <form action="{{ url('login') }}" method="POST">
-                    @csrf
+                    <!-- No WhatsApp -->
+                    <div class="form-group">
+                        <label for="noWa" class="form-label">No. WhatsApp <span class="text-danger">*</span></label>
+                        <input type="tel" class="form-control" value="{{ @old('no_wa') }}" name="no_wa"
+                            id="noWa" placeholder="Contoh: 081234567890" required>
+                        @error('no_wa')
+                            <div class="text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
                     <!-- Email -->
                     <div class="form-group">
                         <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
@@ -464,20 +504,19 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-register">
-                        {{-- <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> --}}
-                        <span>Login</span>
+                    <button type="submit" class="btn btn-register" id="submitBtn">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span>Daftar Sekarang</span>
                     </button>
-
-                    <div class="divider">
-                        <span>atau</span>
-                    </div>
-
-                    <div class="login-link">
-                        Belum punya akun? <a href="{{ url('register') }}">Registrasi di sini</a>
-                    </div>
-
                 </form>
+
+                <div class="divider">
+                    <span>atau</span>
+                </div>
+
+                <div class="login-link">
+                    Sudah punya akun? <a href="login.html">Masuk di sini</a>
+                </div>
             </div>
         </div>
     </div>
@@ -485,6 +524,200 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <!-- Custom JS -->
+    {{-- <script>
+        // Form validation and submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registrationForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            const passwordStrength = document.getElementById('passwordStrength');
+            const passwordFeedback = document.getElementById('passwordFeedback');
+
+            // Toggle password visibility
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="bi bi-eye"></i>' :
+                    '<i class="bi bi-eye-slash"></i>';
+            });
+
+            // Password strength checker
+            passwordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                let feedback = '';
+
+                if (password.length >= 8) strength++;
+                if (password.match(/[a-z]+/)) strength++;
+                if (password.match(/[A-Z]+/)) strength++;
+                if (password.match(/[0-9]+/)) strength++;
+                if (password.match(/[$@#&!]+/)) strength++;
+
+                passwordStrength.className = 'password-strength-bar';
+
+                if (password.length === 0) {
+                    feedback = '';
+                } else if (strength < 2) {
+                    passwordStrength.classList.add('strength-weak');
+                    feedback = 'Password lemah';
+                    passwordFeedback.className = 'password-feedback feedback-weak';
+                } else if (strength < 4) {
+                    passwordStrength.classList.add('strength-medium');
+                    feedback = 'Password sedang';
+                    passwordFeedback.className = 'password-feedback feedback-medium';
+                } else {
+                    passwordStrength.classList.add('strength-strong');
+                    feedback = 'Password kuat';
+                    passwordFeedback.className = 'password-feedback feedback-strong';
+                }
+
+                passwordFeedback.textContent = feedback;
+            });
+
+            // Form validation
+            function validateForm() {
+                let isValid = true;
+                const fields = [{
+                        id: 'namaLengkap',
+                        message: 'Nama lengkap harus diisi'
+                    },
+                    {
+                        id: 'alamat',
+                        message: 'Alamat harus diisi'
+                    },
+                    {
+                        id: 'noWa',
+                        message: 'Nomor WhatsApp tidak valid'
+                    },
+                    {
+                        id: 'status',
+                        message: 'Status harus dipilih'
+                    },
+                    {
+                        id: 'email',
+                        message: 'Email tidak valid'
+                    },
+                    {
+                        id: 'password',
+                        message: 'Password minimal 8 karakter'
+                    },
+                    {
+                        id: 'konfirmasiPassword',
+                        message: 'Password tidak cocok'
+                    }
+                ];
+
+                // Clear previous errors
+                document.querySelectorAll('.error-message').forEach(error => {
+                    error.classList.remove('show');
+                });
+
+                // Validate each field
+                fields.forEach(field => {
+                    const input = document.getElementById(field.id);
+                    const error = document.getElementById(field.id + 'Error');
+
+                    if (!input.value.trim()) {
+                        error.textContent = field.message;
+                        error.classList.add('show');
+                        isValid = false;
+                    } else if (field.id === 'noWa') {
+                        // Validate WhatsApp number
+                        const waNumber = input.value.replace(/[^0-9]/g, '');
+                        if (waNumber.length < 10 || waNumber.length > 13) {
+                            error.textContent = field.message;
+                            error.classList.add('show');
+                            isValid = false;
+                        }
+                    } else if (field.id === 'email') {
+                        // Validate email
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (!emailRegex.test(input.value)) {
+                            error.textContent = field.message;
+                            error.classList.add('show');
+                            isValid = false;
+                        }
+                    } else if (field.id === 'password') {
+                        if (input.value.length < 8) {
+                            error.textContent = field.message;
+                            error.classList.add('show');
+                            isValid = false;
+                        }
+                    } else if (field.id === 'konfirmasiPassword') {
+                        const password = document.getElementById('password').value;
+                        if (input.value !== password) {
+                            error.textContent = field.message;
+                            error.classList.add('show');
+                            isValid = false;
+                        }
+                    }
+                });
+
+                // Validate terms checkbox
+                const terms = document.getElementById('terms');
+                const termsError = document.getElementById('termsError');
+                if (!terms.checked) {
+                    termsError.classList.add('show');
+                    isValid = false;
+                }
+
+                return isValid;
+            }
+
+            // Form submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                if (validateForm()) {
+                    // Show loading state
+                    submitBtn.classList.add('loading');
+                    submitBtn.disabled = true;
+
+                    // Simulate API call
+                    setTimeout(() => {
+                        // Hide loading state
+                        submitBtn.classList.remove('loading');
+                        submitBtn.disabled = false;
+
+                        // Show success message
+                        successMessage.classList.add('show');
+
+                        // Reset form
+                        form.reset();
+                        passwordStrength.className = 'password-strength-bar';
+                        passwordFeedback.textContent = '';
+
+                        // Scroll to top of form
+                        document.querySelector('.registration-container').scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            successMessage.classList.remove('show');
+                        }, 5000);
+                    }, 2000);
+                }
+            });
+
+            // Real-time validation
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    const error = document.getElementById(this.id + 'Error');
+                    if (error) {
+                        if (this.value.trim()) {
+                            error.classList.remove('show');
+                        }
+                    }
+                });
+            });
+        });
+    </script> --}}
 </body>
 
 </html>

@@ -17,6 +17,10 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
 
+            $table->integer('total_harga');
+            $table->enum('status_pembayaran', ['pending', 'success'])->default('pending');
+            $table->enum('status_booking', ['pending', 'confirmed', 'check_in', 'check_out']);
+
             $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
             $table->timestamps();

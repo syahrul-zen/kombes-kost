@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Member::create(['name' => 'Alice']);
-        \App\Models\Member::create(['name' => 'Bob']);
+        // \App\Models\Member::create(['name' => 'Alice']);
+        // \App\Models\Member::create(['name' => 'Bob']);
 
         // \App\Models\Room::create(['nama' => 'Room A', 'tipe' => 'A', 'harga_per_3_bulan' => 100000]);
         // \App\Models\Room::create(['nama' => 'Room B', 'tipe' => 'B', 'harga_per_3_bulan' => 200000]);
@@ -32,5 +32,61 @@ class DatabaseSeeder extends Seeder
         //     'room_id' => 1,
         // ]);
 
+        \App\Models\User::create([
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password'),
+            'no_wa' => '082387120434',
+        ]);
+
+        // ==========================================
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 1',
+            'tipe' => 'A',
+            'harga_per_3_bulan' => 3000000,
+            'gambar_sampul' => 'gambar_1.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 2',
+            'tipe' => 'A',
+            'harga_per_3_bulan' => 3000000,
+            'gambar_sampul' => 'gambar_2.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 3',
+            'tipe' => 'B',
+            'harga_per_3_bulan' => 6000000,
+            'gambar_sampul' => 'gambar_3.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 4',
+            'tipe' => 'B',
+            'harga_per_3_bulan' => 6000000,
+            'gambar_sampul' => 'gambar_4.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 5',
+            'tipe' => 'B',
+            'harga_per_3_bulan' => 12000000,
+            'gambar_sampul' => 'gambar_5.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 6',
+            'tipe' => 'B',
+            'harga_per_3_bulan' => 12000000,
+            'gambar_sampul' => 'gambar_7.jpeg',
+            'deskripsi' => 'Aman dan Nyaman'
+        ]);
     }
 }

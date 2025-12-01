@@ -12,7 +12,14 @@ class Booking extends Model
     protected $fillable = [
         'start_date',
         'end_date',
+        'total_harga',
+        'status_pembayaran',
+        'status_booking',
         'member_id',
         'room_id',
     ];
+
+    public function member() {
+        return $this->belongsTo(Member::class);
+    }
 }
