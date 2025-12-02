@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 
 class MemberController extends Controller
 {
@@ -13,7 +14,10 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+
+        return view('Admin.Member.index', [
+            'members' => Member::latest()->get(),
+        ]);
     }
 
     /**
@@ -55,7 +59,9 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        return view('Admin.Member.edit', [
+            'member' => $member,
+        ]);
     }
 
     /**
@@ -63,7 +69,46 @@ class MemberController extends Controller
      */
     public function update(Request $request, Member $member)
     {
-        //
+
+        $rules = [
+            'nama_lengkap' => 'required|max:200',
+            'alamat' => 'required|max:200',
+            'foto' => 'max:2000',
+        ];
+
+        if ($request->password) {
+            $rules['password'] = 'max:20';
+        }
+
+        if ($member->email != $request->email) {
+            $rules['email'] = 'required|max:100|email:dns|unique:admin|unique:members';
+        }
+
+        if ($member->no_wa != $request->no_wa) {
+            $rules['no_wa'] = 'required|max:20|unique:members';
+        }
+
+        $validated = $request->validate($rules);
+
+        if ($request->password) {
+            $validated['password'] = bcrypt($request->password);
+        }
+
+        $foto = $request->file('foto');
+
+        if ($foto) {
+            $rename = uniqid().'_'.$foto->getClientOriginalName();
+            $validated['foto'] = $rename;
+            $locationFile = 'File';
+            $foto->move($locationFile, $rename);
+
+            File::delete($locationFile.'/'.$member->foto);
+        }
+
+        $member->update($validated);
+
+        return redirect('/member')->with('success', 'Data member berhasil di update');
+
     }
 
     /**
