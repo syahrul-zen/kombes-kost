@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
 
 class BookingController extends Controller
 {
@@ -13,7 +15,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        return view('Admin.Booking.index', [
+            'bookings' => Booking::with('member', 'room')->latest()->get()
+        ]);
     }
 
     /**
@@ -37,7 +41,9 @@ class BookingController extends Controller
      */
     public function show(Booking $booking)
     {
-        //
+        return view('Admin.Booking.detail', [
+            'booking' => $booking->load('member', 'room')
+        ]);
     }
 
     /**
@@ -136,6 +142,10 @@ class BookingController extends Controller
         $renameFile = uniqid().'_'.$file->getClientOriginalName();
         $locationFile = 'File';
         $file->move($locationFile, $renameFile);
+
+        if($booking->bukti_pembayaran) {
+            File::delete('File/' . $booking->bukti_pembayaran);
+        }
 
         $booking->bukti_pembayaran = $renameFile;
 

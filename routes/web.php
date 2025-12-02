@@ -94,3 +94,8 @@ Route::get('detail/{booking}', [BookingController::class, 'detail']);
 Route::get('/profile', [MemberController::class, 'profile']);
 
 Route::post('/upload-pembayaran/{booking}', [BookingController::class, 'uploadPembayaran']);
+
+Route::controller(BookingController::class)->group(function() {
+    Route::get("/booking-admin", 'index');
+    Route::get('/booking-admin/{booking}', 'show');
+});
