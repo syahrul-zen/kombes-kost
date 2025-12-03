@@ -81,7 +81,7 @@ class MemberController extends Controller
         }
 
         if ($member->email != $request->email) {
-            $rules['email'] = 'required|max:100|email:dns|unique:admin|unique:members';
+            $rules['email'] = 'required|max:100|email:dns|unique:admin|unique:members|unique:owners';
         }
 
         if ($member->no_wa != $request->no_wa) {

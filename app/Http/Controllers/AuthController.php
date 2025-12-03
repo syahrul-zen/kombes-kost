@@ -20,9 +20,9 @@ class AuthController extends Controller
             'nama_lengkap' => 'required|max:200',
             'alamat' => 'required|max:200',
             'no_wa' => 'required|max:20|unique:members',
-            'email' => 'required|max:100|email:dns|unique:members',
+            'email' => 'required|max:100|email:dns|unique:members|unique:owners',
             'password' => 'required|max:20',
-            'foto' => 'image|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $file = $request->file('foto');

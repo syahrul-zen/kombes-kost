@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\MemberController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RoomController;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
@@ -108,4 +109,14 @@ Route::controller(MemberController::class)->group(function () {
     Route::get('/member/{member}/edit', 'edit');
     Route::put('/member/{member}', 'update');
     Route::delete('/member/{member}', 'destroy');
+});
+
+Route::get('/edit-admin', [OwnerController::class, 'editAdmin']);
+Route::get('/edit-owner', [OwnerController::class, 'editOwner']);
+
+Route::controller(OwnerController::class)->group(function() {
+    Route::get('/edit-admin', 'editAdmin');
+    Route::get('/edit-owner', 'editOwner');
+    Route::put('/update-owner/{owner}', 'updateOwner');
+    Route::put('/update-admin/{admin}', 'updateAdmin');
 });

@@ -38,6 +38,12 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'no_wa' => '082387120434',
         ]);
+        
+        \App\Models\Owner::create([
+            'name' => 'Owner Kombes Kost',
+            'email' => 'owner@gmail.com',
+            'password' => bcrypt('password'),
+        ]);
 
         // ==========================================
 

@@ -1,12 +1,12 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <!-- Modal -->
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="imageModalLabel">Tampilan Penuh Foto Kamar</h5>
+                    <h5 class="modal-title" id="imageModalLabel">Tampilan Penuh Foto Member</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body text-center">
@@ -18,12 +18,12 @@
     </div>
 
     <div class="col-12">
-        <h4 class="mb-2"><i class="bi bi-house-door"></i> Daftar Kamar</h4>
+        <h4 class="mb-2"><i class="bi bi-house-door"></i> Daftar Member</h4>
 
         {{-- Session Message --}}
-        @if (session()->has("success"))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session("success") }}
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -31,6 +31,21 @@
         <div class="bg-light rounded p-4">
             <div class="table-responsive">
                 <table class="table-hover table" id="daftar_kamar" style="color:black">
+
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex gap-3">
+                            {{-- Mengubah URL ke endpoint pembuatan kamar --}}
+                            <a href="{{ url('edit-admin') }} " class="btn btn-primary mb-3"><i
+                                    class="bi bi-plus-circle me-2"></i>Edit Admin</a>
+
+                            <a href="{{ url('edit-owner') }} " class="btn btn-primary mb-3"><i
+                                    class="bi bi-plus-circle me-2"></i>Edit Owner</a>
+
+                        </div>
+
+                    </div>
+
+
                     <thead>
                         <tr>
                             <th scope="col">No</th>
@@ -54,17 +69,17 @@
                                 <td>{{ $member->email }}</td>
                                 <td>
                                     {{-- Tambahkan data-bs-toggle dan onclick untuk memicu modal --}}
-                                    <img src="{{ asset("File/" . $member->foto) }}" alt="Foto Kamar"
+                                    <img src="{{ asset('File/' . $member->foto) }}" alt="Foto Member"
                                         style="max-height: 50px; max-width: 50px; object-fit: cover; cursor: pointer;"
                                         data-bs-toggle="modal" data-bs-target="#imageModal"
-                                        onclick="showImage('{{ asset("File/" . $member->foto) }}')">
+                                        onclick="showImage('{{ asset('File/' . $member->foto) }}')">
                                 </td>
                                 <td>
                                     <a href="{{ url("member/$member->id/edit") }}" class="btn btn-warning btn-sm"><i
                                             class="bi bi-pencil-square"></i></a>
 
                                     <form action="{{ url("room/$member->id") }}" method="POST" class="d-inline">
-                                        @method("DELETE")
+                                        @method('DELETE')
                                         @csrf
                                         <button class="btn btn-danger btn-sm"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i
