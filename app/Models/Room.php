@@ -16,10 +16,13 @@ class Room extends Model
         'tipe',
         'harga_per_3_bulan',
         'gambar_sampul',
-        'deskripsi'
+        'gambar_2',
+        'gambar_3',
+        'deskripsi',
     ];
 
-    public function booking() {
+    public function booking()
+    {
         return $this->hasMany(Booking::class);
     }
 }

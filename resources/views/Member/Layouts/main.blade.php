@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pink Residence - Kost Eksklusif & Modern</title>
+        <title>Kombes Kost</title>
 
         <!-- Bootstrap 5 CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
             <div class="container">
                 <a class="navbar-brand" href="#home">
                     <i class="bi bi-house-heart-fill"></i>
-                    Pink Residence
+                    Kombes Kost
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                     <span class="navbar-toggler-icon"></span>
@@ -80,7 +80,7 @@
                 <div class="row">
                     <div class="col-lg-4 mb-4">
                         <div class="footer-widget">
-                            <h5><i class="bi bi-house-heart-fill"></i> Pink Residence</h5>
+                            <h5><i class="bi bi-house-heart-fill"></i> Kombes Kost</h5>
                             <p>Kost eksklusif dengan fasilitas lengkap dan lokasi strategis untuk kenyamanan hidup Anda.
                             </p>
                             <div class="social-links">

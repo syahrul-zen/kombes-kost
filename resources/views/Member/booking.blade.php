@@ -758,7 +758,7 @@
                 <div class="room-images-grid">
                     <div class="room-image-item" data-room-type="standard" data-price="900000"
                         data-facilities='["Bed 120x200", "Meja Belajar", "KM Luar", "Lemari Pakaian", "Jendela Besar"]'>
-                        <img src="https://picsum.photos/seed/standard/400/250" alt="Standard Room">
+                        <img src="{{ asset("File/" . $room->gambar_sampul) }}" alt="Standard Room">
                         {{-- <div class="room-image-overlay">
                             <div class="room-image-info">
                                 <h3>Kamar Standard</h3>
@@ -772,7 +772,7 @@
 
                     <div class="room-image-item" data-room-type="deluxe" data-price="1300000"
                         data-facilities='["Bed 160x200", "Meja Belajar", "AC", "KM Dalam", "Lemari Pakaian", "TV"]'>
-                        <img src="https://picsum.photos/seed/deluxe/400/250" alt="Deluxe Room">
+                        <img src="{{ asset("File/" . $room->gambar_2) }}" alt="Deluxe Room">
                         {{-- <div class="room-image-overlay">
                             <div class="room-image-info">
                                 <h3>Kamar Deluxe</h3>
@@ -786,7 +786,7 @@
 
                     <div class="room-image-item" data-room-type="suite" data-price="1800000"
                         data-facilities='["Bed 180x200", "Meja Belajar", "AC", "KM Dalam", "Lemari Pakaian", "TV", "Ruang Tamu", "Mini Bar"]'>
-                        <img src="https://picsum.photos/seed/suite/400/250" alt="Suite Room">
+                        <img src="{{ asset("File/" . $room->gambar_3) }}" alt="Suite Room">
                         {{-- <div class="room-image-overlay">
                             <div class="room-image-info">
                                 <h3>Kamar Suite</h3>
@@ -871,11 +871,11 @@
                                     <input type="date" class="form-control" min="{{ date("Y-m-d") }}"
                                         name="start_date" value="{{ @old("start_date") }}" required>
 
-                                    @error("start_date")
+                                    @session("error")
                                         <div class="text-danger">
-                                            {{ $message }}
+                                            {{ session("error") }}
                                         </div>
-                                    @enderror
+                                    @endsession
                                 </div>
                             </div>
                         </div>
@@ -886,7 +886,7 @@
                             </label>
                             <select class="form-select" aria-label="Default select example" name="paket_sewa"
                                 id="paketSewaSelect" required>
-                                <option value="" selected>Pilih</option>
+                                <option selected>Pilih</option>
                                 <option value="3">
                                     {{ "3 Bulan" . "(Rp." . number_format($room->harga_per_3_bulan * 1, 0, ",", ".") . ")" }}
                                 </option>
@@ -897,6 +897,13 @@
                                     {{ "12 Bulan" . "(Rp." . number_format($room->harga_per_3_bulan * 4, 0, ",", ".") . ")" }}
                                 </option>
                             </select>
+
+                            @session("error")
+                                <div class="text-danger">
+                                    {{ session("error") }}
+                                </div>
+                            @endsession
+
                         </div>
 
                         {{-- HANYA PERLU SATU HIDDEN INPUT: Harga per 3 Bulan --}}

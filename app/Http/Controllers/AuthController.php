@@ -10,11 +10,31 @@ class AuthController extends Controller
 {
     public function login()
     {
+
+        // Middleware manual
+        if (Auth::guard('member')->check()) {
+            return redirect('/');
+        }
+
+        if (Auth::guard('admin')->check() || Auth::guard('owner')->check()) {
+            return redirect('/dashboard');
+        }
+
         return view('Auth.login');
     }
 
     public function register(Request $request)
     {
+
+        // Middleware manual
+
+        if (Auth::guard('member')->check()) {
+            return redirect('/');
+        }
+
+        if (Auth::guard('admin')->check() || Auth::guard('owner')->check()) {
+            return redirect('/dashboard');
+        }
 
         $validated = $request->validate([
             'nama_lengkap' => 'required|max:200',
@@ -51,7 +71,11 @@ class AuthController extends Controller
         ]);
 
         if (Auth::guard('admin')->attempt($credentials)) {
-            return redirect('/admin')->with('success', 'Berhasil login sebagai admin');
+            return redirect('/dashboard')->with('success', 'Berhasil login sebagai admin');
+        }
+
+        if (Auth::guard('owner')->attempt($credentials)) {
+            return redirect('/dashboard')->with('success', 'Berhasil login sebagai owner');
         }
 
         if (Auth::guard('member')->attempt($credentials)) {
@@ -63,8 +87,11 @@ class AuthController extends Controller
 
     public function logout()
     {
+        // Middleware manual
         if (Auth::guard('admin')->check()) {
             Auth::guard('admin')->logout();
+        } elseif (Auth::guard('owner')->check()) {
+            Auth::guard('owner')->logout();
         } else {
             Auth::guard('member')->logout();
         }

@@ -25,6 +25,15 @@ class MemberController extends Controller
      */
     public function create()
     {
+
+        if (Auth::guard('member')->check()) {
+            return redirect('/');
+        }
+
+        if (Auth::guard('admin')->check() || Auth::guard('owner')->check()) {
+            return redirect('/dashboard');
+        }
+
         return view('Auth.register');
     }
 

@@ -1,6 +1,2 @@
--   Dashboard
 -   Login Owner
--   Foto kamar
--   Foto kamar di tampilan booking
--   show -a (list kamar booking)
 -   middelware

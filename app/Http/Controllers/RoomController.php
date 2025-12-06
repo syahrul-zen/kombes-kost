@@ -37,21 +37,36 @@ class RoomController extends Controller
             'nama' => 'required|unique:rooms|max:100',
             'tipe' => 'required',
             'harga_per_3_bulan' => 'required|numeric',
-            'gambar_sampul' => 'required|max:2000',
+            'gambar_sampul' => 'required|image|max:2100',
+            'gambar_2' => 'required|image|max:2100',
+            'gambar_3' => 'required|image|max:2100',
             'deskripsi' => 'max:1000',
         ]);
 
+        // Handle Gambar Sampul Upload
         $gambar = $request->file('gambar_sampul');
 
         $rename = uniqid().'_'.$gambar->getClientOriginalName();
 
         $validated['gambar_sampul'] = $rename;
 
+        // Handle Gambar 2 Upload
+        $gambar_2 = $request->file('gambar_2');
+        $rename2 = uniqid().'_'.$gambar_2->getClientOriginalName();
+        $validated['gambar_2'] = $rename2;
+
+        // Handle Gambar 3 Upload
+        $gambar_3 = $request->file('gambar_3');
+        $rename3 = uniqid().'_'.$gambar_3->getClientOriginalName();
+        $validated['gambar_3'] = $rename3;
+
         $locationFile = 'File';
 
         Room::create($validated);
 
         $gambar->move($locationFile, $rename);
+        $gambar_2->move($locationFile, $rename2);
+        $gambar_3->move($locationFile, $rename3);
 
         return redirect('/room')->with('success', 'Berhasil menambahkan data kamar');
 
@@ -83,7 +98,9 @@ class RoomController extends Controller
         $rules = [
             'tipe' => 'required',
             'harga_per_3_bulan' => 'required|numeric',
-            'gambar_sampul' => 'max:2000',
+            'gambar_sampul' => 'image|max:2100',
+            'gambar_2' => 'image|max:2100',
+            'gambar_3' => 'image|max:2100',
             'deskripsi' => 'max:1000',
         ];
 
@@ -103,6 +120,26 @@ class RoomController extends Controller
             File::delete('File/'.$room->gambar_sampul);
         }
 
+        if ($request->file('gambar_2')) {
+            $gambar = $request->file('gambar_2');
+            $rename = uniqid().'_'.$gambar->getClientOriginalName();
+            $locationFile = 'File';
+            $gambar->move($locationFile, $rename);
+            $validated['gambar_2'] = $rename;
+
+            File::delete('File/'.$room->gambar_2);
+        }
+
+        if ($request->file('gambar_3')) {
+            $gambar = $request->file('gambar_3');
+            $rename = uniqid().'_'.$gambar->getClientOriginalName();
+            $locationFile = 'File';
+            $gambar->move($locationFile, $rename);
+            $validated['gambar_3'] = $rename;
+
+            File::delete('File/'.$room->gambar_3);
+        }
+
         $room->update($validated);
 
         return redirect('/room')->with('success', 'Berhasil mengedit data kamar');
@@ -114,6 +151,8 @@ class RoomController extends Controller
     public function destroy(Room $room)
     {
         File::delete('File/'.$room->gambar_sampul);
+        File::delete('File/'.$room->gambar_2);
+        File::delete('File/'.$room->gambar_3);
         $room->delete();
 
         return redirect('/room')->with('success', 'Berhasil menghapus data kamar');
@@ -122,7 +161,21 @@ class RoomController extends Controller
     public function viewA()
     {
         return view('Member.view-a', [
-            'rooms' => Room::all(),
+            'rooms' => Room::where('tipe', 'A')->get(),
+        ]);
+    }
+
+    public function viewB()
+    {
+        return view('Member.view-b', [
+            'rooms' => Room::where('tipe', 'B')->get(),
+        ]);
+    }
+
+    public function viewC()
+    {
+        return view('Member.view-c', [
+            'rooms' => Room::where('tipe', 'C')->get(),
         ]);
     }
 }

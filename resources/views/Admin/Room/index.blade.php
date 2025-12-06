@@ -2,7 +2,7 @@
 
 @section("container")
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,7 +25,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -63,8 +63,8 @@
                             <a href="{{ url("room/create") }} " class="btn btn-primary mb-3"><i
                                     class="bi bi-plus-circle me-2"></i>Tambah Kamar</a>
 
-                            <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
-                                    class="bi bi-printer me-2"></i>Cetak</button>
+                            {{-- <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"><i
+                                    class="bi bi-printer me-2"></i>Cetak</button> --}}
                         </div>
 
                     </div>

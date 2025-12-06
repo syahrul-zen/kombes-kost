@@ -42,14 +42,19 @@ return [
         // ],
 
         'member' => [
-            'driver' => 'session', 
-            'provider' => 'member'
-        ], 
-        
+            'driver' => 'session',
+            'provider' => 'member',
+        ],
+
         'admin' => [
-            'driver' => 'session', 
-            'provider' => 'admin'
-        ]
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
+        'owner' => [
+            'driver' => 'session',
+            'provider' => 'owner',
+        ],
     ],
 
     /*
@@ -76,14 +81,19 @@ return [
         // ],
 
         'member' => [
-            'driver' => 'eloquent', 
-            'model' => App\Models\Member::class
-        ], 
+            'driver' => 'eloquent',
+            'model' => App\Models\Member::class,
+        ],
 
         'admin' => [
-            'driver' => 'eloquent', 
-            'model' => App\Models\User::class
-        ]
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
+        'owner' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Owner::class,
+        ],
     ],
 
     /*

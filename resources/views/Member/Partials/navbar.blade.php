@@ -3,7 +3,7 @@
     <div class="container">
         <a class="navbar-brand" href="#home">
             <i class="bi bi-house-heart-fill"></i>
-            Pink Residence
+            Kombes Kost
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>

@@ -406,7 +406,7 @@
                     <!-- Logo -->
                     <div class="logo">
                         <i class="bi bi-house-heart-fill"></i>
-                        Pink Residence
+                        Kombes Kost
                     </div>
 
                     <!-- Back Button -->

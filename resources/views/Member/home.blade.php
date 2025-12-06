@@ -18,11 +18,11 @@
                 <div class="carousel-inner">
                     <!-- Slide 1 -->
                     <div class="carousel-item active">
-                        <img src="https://picsum.photos/seed/kost1/1920/800" class="d-block w-100" alt="Pink Residence 1">
+                        <img src="{{ asset("File/hero1.jpg") }}" class="d-block w-100" alt="Kombes Kost 1">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
-                                <h1 data-aos="fade-right">Selamat Datang di <span>Pink Residence</span></h1>
+                                <h1 data-aos="fade-right">Selamat Datang di <span>Kombes Kost</span></h1>
                                 <p class="subtitle" data-aos="fade-right" data-aos-delay="200">Hunian modern dan
                                     nyaman dengan fasilitas lengkap</p>
                                 <div data-aos="fade-right" data-aos-delay="400">
@@ -35,7 +35,7 @@
 
                     <!-- Slide 2 -->
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/seed/kost2/1920/800" class="d-block w-100" alt="Pink Residence 2">
+                        <img src="{{ asset("File/hero2.jpg") }}" class="d-block w-100" alt="Kombes Kost 2">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -52,7 +52,7 @@
 
                     <!-- Slide 3 -->
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/seed/kost3/1920/800" class="d-block w-100" alt="Pink Residence 3">
+                        <img src="{{ asset("File/hero3.jpg") }}" class="d-block w-100" alt="Kombes Kost 3">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -69,7 +69,7 @@
 
                     <!-- Slide 4 -->
                     <div class="carousel-item">
-                        <img src="https://picsum.photos/seed/kost4/1920/800" class="d-block w-100" alt="Pink Residence 4">
+                        <img src="{{ asset("File/hero1.jpg") }}" class="d-block w-100" alt="Kombes Kost 4">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -100,7 +100,7 @@
         <!-- Mobile Hero Content -->
         <div class="mobile-hero-content d-md-none">
             <div class="text-center text-white">
-                <h1 data-aos="fade-up">Pink Residence</h1>
+                <h1 data-aos="fade-up">Kombes Kost</h1>
                 <p class="subtitle" data-aos="fade-up" data-aos-delay="200">Hunian modern & nyaman</p>
                 <div data-aos="fade-up" data-aos-delay="400">
                     <a href="#rooms" class="btn btn-pink btn-lg me-3">Lihat Kamar</a>
@@ -145,17 +145,17 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-image-container">
-                        <img src="https://picsum.photos/seed/about/600/400" alt="About Pink Residence">
+                        <img src="{{ asset("File/hero2.jpg") }}" alt="About Pink Residence">
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="about-content">
-                        <h2 class="section-title">Tentang Pink Residence</h2>
+                        <h2 class="section-title">Kombes Kost</h2>
                         <p class="section-subtitle">Hunian idaman untuk mahasiswa dan profesional muda</p>
                         <p>Pink Residence adalah kost eksklusif yang dirancang khusus untuk memberikan kenyamanan
                             maksimal bagi penghuninya. Dengan desain modern dan fasilitas lengkap, kami berkomitmen
                             untuk menjadi pilihan terbaik tempat tinggal Anda.</p>
-                        <p>Terletak di lokasi yang sangat strategis, Pink Residence memberikan kemudahan akses ke
+                        <p>Terletak di lokasi yang sangat strategis, Kombes Kost memberikan kemudahan akses ke
                             berbagai fasilitas umum seperti kampus, perkantoran, pusat perbelanjaan, dan
                             transportasi publik.</p>
                         <div class="feature-list">
@@ -192,7 +192,7 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="room-card">
-                        <img src="https://picsum.photos/seed/standard/400/250" alt="Standard Room">
+                        <img src="{{ asset("File/hero3.jpg") }}" alt="Standard Room">
                         <div class="room-content">
                             <div class="room-type">Standard (A)</div>
                             <h3 class="room-name">Kamar Standard</h3>
@@ -219,7 +219,7 @@
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="room-card">
-                        <img src="https://picsum.photos/seed/deluxe/400/250" alt="Deluxe Room">
+                        <img src="{{ asset("File/hero2.jpg") }}" alt="Deluxe Room">
                         <div class="room-content">
                             <div class="room-type">Deluxe</div>
                             <h3 class="room-name">Kamar Deluxe</h3>
@@ -244,13 +244,13 @@
                                     <span>KM Dalam</span>
                                 </div>
                             </div>
-                            <a href="#contact" class="btn btn-pink w-100">Pesan Sekarang</a>
+                            <a href="{{ url("view-b") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="room-card">
-                        <img src="https://picsum.photos/seed/suite/400/250" alt="Suite Room">
+                        <img src="{{ asset("File/hero1.jpg") }}" alt="Suite Room">
                         <div class="room-content">
                             <div class="room-type">Suite</div>
                             <h3 class="room-name">Kamar Suite</h3>
@@ -279,7 +279,7 @@
                                     <span>Ruang Tamu</span>
                                 </div>
                             </div>
-                            <a href="#contact" class="btn btn-pink w-100">Pesan Sekarang</a>
+                            <a href="{{ url("view-c") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
