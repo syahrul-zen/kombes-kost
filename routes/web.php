@@ -113,3 +113,5 @@ Route::controller(OwnerController::class)->group(function () {
     Route::put('/update-owner/{owner}', 'updateOwner')->Middleware('isAdminOwner');
     Route::put('/update-admin/{admin}', 'updateAdmin')->Middleware('isAdminOwner');
 });
+
+Route::get('/room/{room}/show', [BookingController::class, 'check']);

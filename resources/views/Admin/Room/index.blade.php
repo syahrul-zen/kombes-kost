@@ -105,6 +105,9 @@
                                     </p>
                                 </td>
                                 <td>
+                                    <a href="{{ url("room/$room->id/show") }}" class="btn btn-success btn-sm"><i
+                                            class="bi bi-house"></i></a>
+
                                     <a href="{{ url("room/$room->id/edit") }}" class="btn btn-warning btn-sm"><i
                                             class="bi bi-pencil-square"></i></a>
 

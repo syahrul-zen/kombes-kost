@@ -351,4 +351,53 @@ class BookingController extends Controller
         $pdf->Output('I', 'Laporan_Booking_Updated_'.date('Ymd_His').'.pdf');
         exit;
     }
+
+    public function check(Room $room)
+    {
+
+        $roomId = $room->id;
+
+        $tahunAwal = now()->year;
+        $tahunAkhir = now()->year + 1;
+
+        // 1. Ambil semua booking 2 tahun (1 query)
+        $bookings = Booking::with('member')
+            ->where('room_id', $roomId)
+            ->whereDate('start_date', '<=', Carbon::create($tahunAkhir, 12, 31))
+            ->whereDate('end_date', '>=', Carbon::create($tahunAwal, 1, 1))
+            ->orderBy('start_date')
+            ->get();
+
+        // 2. Siapkan kerangka bulan (kosong dulu)
+        $calendar = [];
+
+        $cursor = Carbon::create($tahunAwal, 1, 1);
+        $end = Carbon::create($tahunAkhir, 12, 31);
+
+        while ($cursor <= $end) {
+            $key = $cursor->format('Y-m');
+            $calendar[$key] = collect(); // bulan kosong tetap ada
+            $cursor->addMonth();
+        }
+
+        // 3. Masukkan booking ke bulan yang dilewati
+        foreach ($bookings as $booking) {
+            $start = \Carbon\Carbon::parse($booking->start_date)->startOfMonth();
+            $finish = \Carbon\Carbon::parse($booking->end_date)->startOfMonth();
+
+            while ($start <= $finish) {
+                $key = $start->format('Y-m');
+
+                if (isset($calendar[$key])) {
+                    $calendar[$key]->push($booking);
+                }
+
+                $start->addMonth();
+            }
+        }
+
+        return view('Admin.Room.jadwal-kamar', [
+            'calendar' => $calendar,
+        ]);
+    }
 }

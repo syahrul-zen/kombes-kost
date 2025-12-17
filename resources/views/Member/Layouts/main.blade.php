@@ -7,13 +7,14 @@
         <title>Kombes Kost</title>
 
         <!-- Bootstrap 5 CSS -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ asset("FE/FE_MEMBER/bootstrap.min.css") }}" rel="stylesheet">
 
         <!-- Bootstrap Icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
         <!-- AOS Animation -->
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        {{-- <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"> --}}
+        <link rel="stylesheet" href="{{ asset("FE/FE_MEMBER/aos.css") }}">
 
         <link rel="stylesheet" href="{{ asset("src/member_css.css") }}">
     </head>
@@ -144,10 +145,13 @@
         </footer>
 
         <!-- Bootstrap 5 JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+
+        <script src="{{ asset("FE/FE_MEMBER/bootstrap.bundle.min.js") }}"></script>
+        <script src="{{ asset("FE/FE_MEMBER/aos.js") }}"></script>
 
         <!-- AOS Animation JS -->
-        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        {{-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> --}}
 
         <script src="{{ asset("src/jquery-3.4.1.min.js") }}"></script>
 
