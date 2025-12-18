@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'no_wa' => '082387120434',
         ]);
-        
+
         \App\Models\Owner::create([
             'name' => 'Owner Kombes Kost',
             'email' => 'owner@gmail.com',
@@ -47,52 +47,5 @@ class DatabaseSeeder extends Seeder
 
         // ==========================================
 
-        \App\Models\Room::create([
-            'nama' => 'Kamar 1',
-            'tipe' => 'A',
-            'harga_per_3_bulan' => 3000000,
-            'gambar_sampul' => 'gambar_1.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
-
-        \App\Models\Room::create([
-            'nama' => 'Kamar 2',
-            'tipe' => 'A',
-            'harga_per_3_bulan' => 3000000,
-            'gambar_sampul' => 'gambar_2.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
-
-        \App\Models\Room::create([
-            'nama' => 'Kamar 3',
-            'tipe' => 'B',
-            'harga_per_3_bulan' => 6000000,
-            'gambar_sampul' => 'gambar_3.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
-
-        \App\Models\Room::create([
-            'nama' => 'Kamar 4',
-            'tipe' => 'B',
-            'harga_per_3_bulan' => 6000000,
-            'gambar_sampul' => 'gambar_4.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
-
-        \App\Models\Room::create([
-            'nama' => 'Kamar 5',
-            'tipe' => 'B',
-            'harga_per_3_bulan' => 12000000,
-            'gambar_sampul' => 'gambar_5.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
-
-        \App\Models\Room::create([
-            'nama' => 'Kamar 6',
-            'tipe' => 'B',
-            'harga_per_3_bulan' => 12000000,
-            'gambar_sampul' => 'gambar_7.jpeg',
-            'deskripsi' => 'Aman dan Nyaman'
-        ]);
     }
 }

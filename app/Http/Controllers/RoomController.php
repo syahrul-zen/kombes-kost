@@ -36,7 +36,7 @@ class RoomController extends Controller
         $validated = $request->validate([
             'nama' => 'required|unique:rooms|max:100',
             'tipe' => 'required',
-            'harga_per_3_bulan' => 'required|numeric',
+            'harga_per_6_bulan' => 'required|numeric',
             'gambar_sampul' => 'required|image|max:2100',
             'gambar_2' => 'required|image|max:2100',
             'gambar_3' => 'required|image|max:2100',
@@ -97,7 +97,7 @@ class RoomController extends Controller
     {
         $rules = [
             'tipe' => 'required',
-            'harga_per_3_bulan' => 'required|numeric',
+            'harga_per_6_bulan' => 'required|numeric',
             'gambar_sampul' => 'image|max:2100',
             'gambar_2' => 'image|max:2100',
             'gambar_3' => 'image|max:2100',
