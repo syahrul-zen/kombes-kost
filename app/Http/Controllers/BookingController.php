@@ -97,7 +97,7 @@ class BookingController extends Controller
         $request->validate([
             'start_date' => 'required',
             'paket_sewa' => 'required',
-            'harga_per_3_bulan' => 'required',
+            'harga_per_6_bulan' => 'required',
             'member_id' => 'required',
             'room_id' => ['required', 'exists:rooms,id',
                 function ($attribute, $value, $fail) use ($data) {
@@ -126,7 +126,7 @@ class BookingController extends Controller
 
         $validated['room_id'] = $request['room_id'];
         $validated['member_id'] = $request['member_id'];
-        $validated['total_harga'] = ($request->paket_sewa / 3) * $request['harga_per_3_bulan'];
+        $validated['total_harga'] = ($request->paket_sewa / 6) * $request['harga_per_6_bulan'];
 
         $booking = Booking::create($validated);
 
@@ -398,6 +398,7 @@ class BookingController extends Controller
 
         return view('Admin.Room.jadwal-kamar', [
             'calendar' => $calendar,
+            'room' => $room,
         ]);
     }
 }

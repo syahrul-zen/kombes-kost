@@ -635,7 +635,14 @@
                     </div>
                     <div class="order-item">
                         <div class="order-label">Tipe Kamar</div>
-                        <div class="order-value" id="roomType">{{ $booking->room->tipe }}</div>
+
+                        @if ($booking->room->tipe == "A")
+                            <div class="order-value" id="room ype">Kamar Besar AC</div>
+                        @elseif ($booking->room->tipe == "B")
+                            <div class="order-value" id="room ype">Kamar Besar Non AC</div>
+                        @else
+                            <div class="order-value" id="room ype">Kamar Standard</div>
+                        @endif
                     </div>
                     <div class="order-item">
                         <div class="order-label">Nama Kamar</div>
@@ -883,7 +890,12 @@
                 </div>
 
                 <div class="upload-section">
-                    <h2 class="section-title">Upload Bukti Pembayaran</h2>
+
+                    @if ($booking->bukti_pembayaran)
+                        <h2 class="section-title">Upload Ulang Bukti Pembayaran</h2>
+                    @else
+                        <h2 class="section-title">Upload Bukti Pembayaran</h2>
+                    @endif
 
                     <div class="mb-3">
                         <label for="paymentProof" class="form-label">

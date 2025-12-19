@@ -2,7 +2,7 @@
 
 @section("container")
     <div class="col-12">
-        <h4 class="mb-2"><i class="bi bi-house-door"></i> Jadwal Kamar</h4>
+        <h4 class="mb-2"><i class="bi bi-house-door"></i> Jadwal {{ $room->nama }} </h4>
 
         {{-- Session Message --}}
         @if (session()->has("success"))

@@ -23,7 +23,7 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top">
             <div class="container">
-                <a class="navbar-brand" href="#home">
+                <a class="navbar-brand" href="{{ url("/#home") }}">
                     <i class="bi bi-house-heart-fill"></i>
                     Kombes Kost
                 </a>

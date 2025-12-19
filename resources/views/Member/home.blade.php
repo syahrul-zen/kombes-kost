@@ -18,7 +18,7 @@
                 <div class="carousel-inner">
                     <!-- Slide 1 -->
                     <div class="carousel-item active">
-                        <img src="{{ asset("File/hero1.jpg") }}" class="d-block w-100" alt="Kombes Kost 1">
+                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 1">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -35,7 +35,7 @@
 
                     <!-- Slide 2 -->
                     <div class="carousel-item">
-                        <img src="{{ asset("File/hero2.jpg") }}" class="d-block w-100" alt="Kombes Kost 2">
+                        <img src="{{ asset("FE/img/gambar_depan_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 2">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -52,7 +52,7 @@
 
                     <!-- Slide 3 -->
                     <div class="carousel-item">
-                        <img src="{{ asset("File/hero3.jpg") }}" class="d-block w-100" alt="Kombes Kost 3">
+                        <img src="{{ asset("FE/img/dapur_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 3">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -68,7 +68,7 @@
                     </div>
 
                     <!-- Slide 4 -->
-                    <div class="carousel-item">
+                    {{-- <div class="carousel-item">
                         <img src="{{ asset("File/hero1.jpg") }}" class="d-block w-100" alt="Kombes Kost 4">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
@@ -82,7 +82,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Controls -->
@@ -145,7 +145,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-image-container">
-                        <img src="{{ asset("File/hero2.jpg") }}" alt="About Pink Residence">
+                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" alt="About Pink Residence"
+                            style="height: 400px">
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
@@ -192,14 +193,15 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="room-card">
-                        <img src="{{ asset("File/hero3.jpg") }}" alt="Standard Room">
+                        <img src="{{ asset("FE/img/kamar_1.png") }}" alt="Standard Room">
                         <div class="room-content">
-                            <div class="room-type">Standard (A)</div>
-                            <h3 class="room-name">Kamar Standard</h3>
-                            <p class="text-muted">Kamar nyaman dengan fasilitas dasar lengkap</p>
-                            <div class="room-price">Rp 900.000<span class="text-muted"
-                                    style="font-size: 1rem;">/bulan</span></div>
-                            <div class="room-features">
+                            <div class="room-type">Besar (A)</div>
+                            <h3 class="room-name">Kamar Besar AC</h3>
+                            <p class="text-muted">Kamar dengan ukuran spring bad 180x200
+                            </p>
+                            <div class="room-price">Rp 6.000.000<span class="text-muted" style="font-size: 1rem;">/ 6
+                                    bulan</span></div>
+                            {{-- <div class="room-features">
                                 <div class="room-feature">
                                     <i class="bi bi-bed"></i>
                                     <span>Bed 120x200</span>
@@ -212,6 +214,33 @@
                                     <i class="bi bi-cup-hot"></i>
                                     <span>KM Luar</span>
                                 </div>
+                            </div> --}}
+
+                            <div class="kost-features">
+                                <div class="kost-feature">
+                                    <i class="bi bi-layers"></i>
+                                    <span>Spring Bed</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-snow"></i>
+                                    <span>AC</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-droplet"></i>
+                                    <span>KM Dalam</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-tag"></i>
+                                    <span>Jemuran Handuk</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-door-closed"></i>
+                                    <span>Lemari</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-laptop"></i>
+                                    <span>Meja Belajar</span>
+                                </div>
                             </div>
                             <a href="{{ url("view-a") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
@@ -219,14 +248,15 @@
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="room-card">
-                        <img src="{{ asset("File/hero2.jpg") }}" alt="Deluxe Room">
+                        <img src="{{ asset("FE/img/kamar_2.jpeg") }}" alt="Deluxe Room">
                         <div class="room-content">
-                            <div class="room-type">Deluxe</div>
-                            <h3 class="room-name">Kamar Deluxe</h3>
-                            <p class="text-muted">Kamar lebih luas dengan fasilitas premium</p>
-                            <div class="room-price">Rp 1.300.000<span class="text-muted"
-                                    style="font-size: 1rem;">/bulan</span></div>
-                            <div class="room-features">
+                            <div class="room-type">Besar (B)</div>
+                            <h3 class="room-name">Kamar Besar Non AC</h3>
+                            <p class="text-muted">Kamar dengan ukuran spring bad 180x200
+                            </p>
+                            <div class="room-price">Rp 4.500.000<span class="text-muted" style="font-size: 1rem;">/ 6
+                                    bulan</span></div>
+                            {{-- <div class="room-features">
                                 <div class="room-feature">
                                     <i class="bi bi-bed"></i>
                                     <span>Bed 160x200</span>
@@ -243,6 +273,33 @@
                                     <i class="bi bi-cup-hot"></i>
                                     <span>KM Dalam</span>
                                 </div>
+                            </div> --}}
+
+                            <div class="kost-features">
+                                <div class="kost-feature">
+                                    <i class="bi bi-layers"></i>
+                                    <span>Spring Bed</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-snow"></i>
+                                    <span>AC</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-droplet"></i>
+                                    <span>KM Dalam</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-tag"></i>
+                                    <span>Jemuran Handuk</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-door-closed"></i>
+                                    <span>Lemari</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-laptop"></i>
+                                    <span>Meja Belajar</span>
+                                </div>
                             </div>
                             <a href="{{ url("view-b") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
@@ -250,14 +307,16 @@
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="room-card">
-                        <img src="{{ asset("File/hero1.jpg") }}" alt="Suite Room">
+
+                        <img src="{{ asset("FE/img/kamar_3.jpeg") }}" alt="Suite Room">
                         <div class="room-content">
-                            <div class="room-type">Suite</div>
-                            <h3 class="room-name">Kamar Suite</h3>
-                            <p class="text-muted">Kamar mewah dengan ruang tamu pribadi</p>
-                            <div class="room-price">Rp 1.800.000<span class="text-muted"
-                                    style="font-size: 1rem;">/bulan</span></div>
-                            <div class="room-features">
+                            <div class="room-type">Standard (C)</div>
+                            <h3 class="room-name">Kamar Standard</h3>
+                            <p class="text-muted">Kamar dengan ukuran spring bad 120x200
+                            </p>
+                            <div class="room-price">Rp 3.750.000<span class="text-muted" style="font-size: 1rem;">/ 6
+                                    bulan</span></div>
+                            {{-- <div class="room-features">
                                 <div class="room-feature">
                                     <i class="bi bi-bed"></i>
                                     <span>Bed 180x200</span>
@@ -277,13 +336,41 @@
                                 <div class="room-feature">
                                     <i class="bi bi-couch"></i>
                                     <span>Ruang Tamu</span>
+                                </div> --}}
+
+                            <div class="kost-features">
+                                <div class="kost-feature">
+                                    <i class="bi bi-layers"></i>
+                                    <span>Spring Bed</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-snow"></i>
+                                    <span>AC</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-droplet"></i>
+                                    <span>KM Dalam</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-tag"></i>
+                                    <span>Jemuran Handuk</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-door-closed"></i>
+                                    <span>Lemari</span>
+                                </div>
+                                <div class="kost-feature">
+                                    <i class="bi bi-laptop"></i>
+                                    <span>Meja Belajar</span>
                                 </div>
                             </div>
+
                             <a href="{{ url("view-c") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -413,17 +500,22 @@
             <div class="row">
                 <div class="col-lg-8" data-aos="fade-right">
                     <div class="map-container">
-                        <iframe
+                        {{-- <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.266695!2d106.825!3d-6.2088!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInMzEuNyJTIDEwNsKwNDknMzAuMCJF!5e0!3m2!1sen!2sid!4v1234567890"
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
+                        </iframe> --}}
+
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.2316503792695!2d103.53142057586032!3d-1.6159159360770567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e2f63005d85534d%3A0x72c0dab7dfb4cf!2sKombes%20kost!5e0!3m2!1sid!2sid!4v1766140441858!5m2!1sid!2sid"
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-left">
                     <div class="location-info">
                         <h4 class="mb-4">Alamat Lengkap</h4>
-                        <p class="mb-3"><i class="bi bi-geo-alt-fill text-pink me-2"></i> Jl. Pink Residence No.
-                            123, Jakarta Selatan</p>
+                        <p class="mb-3"><i class="bi bi-geo-alt-fill text-pink me-2"></i>Blk. Q No.41, Mendalo Darat,
+                            Kec. Jambi Luar Kota, Kabupaten Muaro Jambi, Jambi 36361</p>
                         <h5 class="mb-3 mt-4">Dekat Dengan:</h5>
                         <ul class="location-list">
                             <li><i class="bi bi-check-circle-fill"></i> Universitas Indonesia (15 menit)</li>

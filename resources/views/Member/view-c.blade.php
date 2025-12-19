@@ -4,7 +4,7 @@
     <section id="rooms" class="kost-section" style="margin-top: 40px">
         <div class="container">
             <div class="mb-5 text-center" data-aos="fade-up">
-                <h2 class="section-title">Tipe Kamar C</h2>
+                <h2 class="section-title">Kamar Standard</h2>
                 <p class="section-subtitle">Pilih kamar sesuai kebutuhan dan budget Anda</p>
             </div>
             <div class="row g-4">
@@ -17,11 +17,11 @@
                                 class="kost-card-img">
                             <div class="kost-content">
                                 {{-- <div class="kost-type">Standard (A)</div> --}}
-                                <h3 class="kost-name">Kamar Standard</h3>
+                                <h3 class="kost-name">{{ $room->nama }}</h3>
                                 {{-- <p class="text-muted">Kamar nyaman dengan fasilitas dasar lengkap</p> --}}
                                 <div class="kost-price">
-                                    {{ "Rp. " . number_format($room->harga_per_3_bulan, 0, ",", ".") }}<span
-                                        class="text-muted" style="font-size: 1rem;">/bulan</span></div>
+                                    {{ "Rp. " . number_format($room->harga_per_6_bulan, 0, ",", ".") }}<span
+                                        class="text-muted" style="font-size: 1rem;">/ 6 bulan</span></div>
                                 <div class="kost-features">
                                     <div class="kost-feature">
                                         <i class="bi bi-menu-app"></i>

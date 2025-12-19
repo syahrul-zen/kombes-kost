@@ -15,6 +15,7 @@ class Booking extends Model
         'total_harga',
         'status_pembayaran',
         'status_booking',
+        'bukti_pembayaran',
         'member_id',
         'room_id',
     ];
