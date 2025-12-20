@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama')->unique();
             $table->enum('tipe', ['A', 'B', 'C']);
-            $table->integer('harga_per_3_bulan');
-            // $table->integer('harga_per_tahun');
+            $table->integer('harga_per_6_bulan');
             $table->string('gambar_sampul');
             $table->string('gambar_2')->nullable();
             $table->string('gambar_3')->nullable();

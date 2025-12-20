@@ -97,7 +97,7 @@ class BookingController extends Controller
         $request->validate([
             'start_date' => 'required',
             'paket_sewa' => 'required',
-            'harga_per_3_bulan' => 'required',
+            'harga_per_6_bulan' => 'required',
             'member_id' => 'required',
             'room_id' => ['required', 'exists:rooms,id',
                 function ($attribute, $value, $fail) use ($data) {
@@ -126,7 +126,7 @@ class BookingController extends Controller
 
         $validated['room_id'] = $request['room_id'];
         $validated['member_id'] = $request['member_id'];
-        $validated['total_harga'] = ($request->paket_sewa / 3) * $request['harga_per_3_bulan'];
+        $validated['total_harga'] = ($request->paket_sewa / 6) * $request['harga_per_6_bulan'];
 
         $booking = Booking::create($validated);
 
@@ -350,5 +350,55 @@ class BookingController extends Controller
         // ----------------------------------------------------
         $pdf->Output('I', 'Laporan_Booking_Updated_'.date('Ymd_His').'.pdf');
         exit;
+    }
+
+    public function check(Room $room)
+    {
+
+        $roomId = $room->id;
+
+        $tahunAwal = now()->year;
+        $tahunAkhir = now()->year + 1;
+
+        // 1. Ambil semua booking 2 tahun (1 query)
+        $bookings = Booking::with('member')
+            ->where('room_id', $roomId)
+            ->whereDate('start_date', '<=', Carbon::create($tahunAkhir, 12, 31))
+            ->whereDate('end_date', '>=', Carbon::create($tahunAwal, 1, 1))
+            ->orderBy('start_date')
+            ->get();
+
+        // 2. Siapkan kerangka bulan (kosong dulu)
+        $calendar = [];
+
+        $cursor = Carbon::create($tahunAwal, 1, 1);
+        $end = Carbon::create($tahunAkhir, 12, 31);
+
+        while ($cursor <= $end) {
+            $key = $cursor->format('Y-m');
+            $calendar[$key] = collect(); // bulan kosong tetap ada
+            $cursor->addMonth();
+        }
+
+        // 3. Masukkan booking ke bulan yang dilewati
+        foreach ($bookings as $booking) {
+            $start = \Carbon\Carbon::parse($booking->start_date)->startOfMonth();
+            $finish = \Carbon\Carbon::parse($booking->end_date)->startOfMonth();
+
+            while ($start <= $finish) {
+                $key = $start->format('Y-m');
+
+                if (isset($calendar[$key])) {
+                    $calendar[$key]->push($booking);
+                }
+
+                $start->addMonth();
+            }
+        }
+
+        return view('Admin.Room.jadwal-kamar', [
+            'calendar' => $calendar,
+            'room' => $room,
+        ]);
     }
 }

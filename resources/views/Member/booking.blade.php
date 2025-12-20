@@ -716,6 +716,15 @@
                     width: 100%;
                 }
             }
+
+            .room-image-item {
+                cursor: pointer;
+                transition: opacity 0.3s;
+            }
+
+            .room-image-item:hover {
+                opacity: 0.8;
+            }
         </style>
     </head>
 
@@ -752,50 +761,60 @@
             @enderror
 
             <!-- Room Gallery -->
-            <div class="room-gallery">
+            {{-- <div class="room-gallery">
                 <h2 class="section-title">Gambar Kamar</h2>
 
                 <div class="room-images-grid">
                     <div class="room-image-item" data-room-type="standard" data-price="900000"
                         data-facilities='["Bed 120x200", "Meja Belajar", "KM Luar", "Lemari Pakaian", "Jendela Besar"]'>
                         <img src="{{ asset("File/" . $room->gambar_sampul) }}" alt="Standard Room">
-                        {{-- <div class="room-image-overlay">
-                            <div class="room-image-info">
-                                <h3>Kamar Standard</h3>
-                                <div class="price">Rp 900.000/bulan</div>
-                            </div>
-                        </div>
-                        <div class="selected-indicator">
-                            <i class="bi bi-check-lg"></i>
-                        </div> --}}
                     </div>
 
                     <div class="room-image-item" data-room-type="deluxe" data-price="1300000"
                         data-facilities='["Bed 160x200", "Meja Belajar", "AC", "KM Dalam", "Lemari Pakaian", "TV"]'>
                         <img src="{{ asset("File/" . $room->gambar_2) }}" alt="Deluxe Room">
-                        {{-- <div class="room-image-overlay">
-                            <div class="room-image-info">
-                                <h3>Kamar Deluxe</h3>
-                                <div class="price">Rp 1.300.000/bulan</div>
-                            </div>
-                        </div>
-                        <div class="selected-indicator">
-                            <i class="bi bi-check-lg"></i>
-                        </div> --}}
                     </div>
 
                     <div class="room-image-item" data-room-type="suite" data-price="1800000"
                         data-facilities='["Bed 180x200", "Meja Belajar", "AC", "KM Dalam", "Lemari Pakaian", "TV", "Ruang Tamu", "Mini Bar"]'>
                         <img src="{{ asset("File/" . $room->gambar_3) }}" alt="Suite Room">
-                        {{-- <div class="room-image-overlay">
-                            <div class="room-image-info">
-                                <h3>Kamar Suite</h3>
-                                <div class="price">Rp 1.800.000/bulan</div>
-                            </div>
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class="room-gallery">
+                <h2 class="section-title">Gambar Kamar</h2>
+                <div class="room-images-grid">
+                    {{-- Gambar 1 --}}
+                    <div class="room-image-item"
+                        onclick="openModal('{{ asset("File/" . $room->gambar_sampul) }}', 'Gambar Utama')">
+                        <img src="{{ asset("File/" . $room->gambar_sampul) }}" alt="Standard Room"
+                            class="img-fluid rounded">
+                    </div>
+
+                    {{-- Gambar 2 --}}
+                    <div class="room-image-item"
+                        onclick="openModal('{{ asset("File/" . $room->gambar_2) }}', 'Interior Kamar')">
+                        <img src="{{ asset("File/" . $room->gambar_2) }}" alt="Deluxe Room" class="img-fluid rounded">
+                    </div>
+
+                    {{-- Gambar 3 --}}
+                    <div class="room-image-item"
+                        onclick="openModal('{{ asset("File/" . $room->gambar_3) }}', 'Kamar Mandi / Detail Lain')">
+                        <img src="{{ asset("File/" . $room->gambar_3) }}" alt="Suite Room" class="img-fluid rounded">
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content border-0 bg-transparent">
+                        <div class="modal-body position-relative p-0 text-center">
+                            <button type="button" class="btn-close btn-close-white position-absolute end-0 top-0 m-3"
+                                data-bs-dismiss="modal" aria-label="Close"></button>
+                            <img src="" id="modalImage" class="img-fluid rounded" alt="Preview">
+                            <div id="modalCaption" class="fw-bold mt-3 text-white"></div>
                         </div>
-                        <div class="selected-indicator">
-                            <i class="bi bi-check-lg"></i>
-                        </div> --}}
                     </div>
                 </div>
             </div>
@@ -854,6 +873,84 @@
                 </div>
             </div>
 
+            <div class="additional-services mt-5">
+                <h2 class="section-title mb-4">Peraturan Kamar</h2>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card border-0 p-4 shadow-sm" style="border-radius: 15px;">
+                            <div class="rules-list">
+                                <div class="rule-item d-flex align-items-start mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-person-vcard text-pink fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold mb-0">Identitas Diri</p>
+                                        <small class="text-muted">Wajib memiliki KTP/Kartu Siswa/Kartu Pelajar yang
+                                            berlaku dan menyerahkan fotocopy-nya kepada pemilik kost.</small>
+                                    </div>
+                                </div>
+
+                                <div class="rule-item d-flex align-items-start mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-people text-pink fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold mb-0">Tamu Laki-Laki</p>
+                                        <small class="text-muted">Dilarang membawa tamu laki-laki ke dalam kamar.
+                                            Pertemuan cukup di ruang tamu yang telah disediakan.</small>
+                                    </div>
+                                </div>
+
+                                <div class="rule-item d-flex align-items-start mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-exclamation-octagon text-danger fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold text-danger mb-0">Larangan Narkoba & Miras</p>
+                                        <small class="text-muted">Dilarang keras mengonsumsi atau menyimpan narkoba,
+                                            minuman keras, dan barang terlarang lainnya.</small>
+                                    </div>
+                                </div>
+
+                                <div class="rule-item d-flex align-items-start mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-clock text-pink fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold mb-0">Jam Malam (Curfew)</p>
+                                        <small class="text-muted">Pintu pagar ditutup jam 22:00 WIB. Keperluan mendesak
+                                            harap lapor kepada penjaga kost.</small>
+                                    </div>
+                                </div>
+
+                                <div class="rule-item d-flex align-items-start mb-3">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-info-circle text-pink fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold mb-0">Lapor Tamu Menginap</p>
+                                        <small class="text-muted">Harap melapor jika ada teman/keluarga yang menginap
+                                            demi keamanan dan kenyamanan bersama.</small>
+                                    </div>
+                                </div>
+
+                                <div class="rule-item d-flex align-items-start">
+                                    <div class="icon-box me-3">
+                                        <i class="bi bi-trash text-pink fs-4"></i>
+                                    </div>
+                                    <div>
+                                        <p class="fw-semibold mb-0">Kebersihan Lingkungan</p>
+                                        <small class="text-muted">Wajib menjaga kebersihan kamar dan lingkungan kost,
+                                            serta membuang sampah pada tempatnya.</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Booking Form -->
             <div class="booking-form">
                 <h2 class="section-title">Data Pemesanan</h2>
@@ -887,14 +984,14 @@
                             <select class="form-select" aria-label="Default select example" name="paket_sewa"
                                 id="paketSewaSelect" required>
                                 <option selected>Pilih</option>
-                                <option value="3">
+                                {{-- <option value="3">
                                     {{ "3 Bulan" . "(Rp." . number_format($room->harga_per_3_bulan * 1, 0, ",", ".") . ")" }}
-                                </option>
+                                </option> --}}
                                 <option value="6">
-                                    {{ "6 Bulan" . "(Rp." . number_format($room->harga_per_3_bulan * 2, 0, ",", ".") . ")" }}
+                                    {{ "6 Bulan" . "(Rp." . number_format($room->harga_per_6_bulan * 1, 0, ",", ".") . ")" }}
                                 </option>
                                 <option value="12">
-                                    {{ "12 Bulan" . "(Rp." . number_format($room->harga_per_3_bulan * 4, 0, ",", ".") . ")" }}
+                                    {{ "12 Bulan" . "(Rp." . number_format($room->harga_per_6_bulan * 2, 0, ",", ".") . ")" }}
                                 </option>
                             </select>
 
@@ -908,8 +1005,8 @@
 
                         {{-- HANYA PERLU SATU HIDDEN INPUT: Harga per 3 Bulan --}}
                         {{-- Asumsi data harga diambil dari objek $room --}}
-                        <input type="hidden" name="harga_per_3_bulan" id="harga3Bulan"
-                            value="{{ $room->harga_per_3_bulan }}">
+                        <input type="hidden" name="harga_per_6_bulan" id="harga3Bulan"
+                            value="{{ $room->harga_per_6_bulan }}">
 
                         <input type="hidden" name="member_id" value="{{ Auth::guard("member")->user()->id }}">
                         <input type="hidden" name="room_id" value="{{ $room->id }}">
@@ -1008,11 +1105,11 @@
                         durasiTeks = "3 Bulan";
                     } else if (durasiBulan === '6') {
                         // Logika: Harga 6 Bulan = Harga 3 Bulan * 2
-                        hargaSewa = hargaDasar3Bulan * 2;
+                        hargaSewa = hargaDasar3Bulan * 1;
                         durasiTeks = "6 Bulan";
                     } else if (durasiBulan === '12') {
                         // Logika: Harga 12 Bulan = Harga 3 Bulan * 4
-                        hargaSewa = hargaDasar3Bulan * 4;
+                        hargaSewa = hargaDasar3Bulan * 2;
                         durasiTeks = "12 Bulan";
                     }
 
@@ -1040,6 +1137,20 @@
                     });
                 }
             });
+
+            function openModal(imageSrc, caption) {
+                // Ambil elemen modal dan gambar di dalamnya
+                const modalImage = document.getElementById('modalImage');
+                const modalCaption = document.getElementById('modalCaption');
+                const myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+
+                // Set sumber gambar dan teks caption
+                modalImage.src = imageSrc;
+                modalCaption.innerText = caption;
+
+                // Tampilkan modal
+                myModal.show();
+            }
         </script>
 
     </body>

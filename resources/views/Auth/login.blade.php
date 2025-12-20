@@ -410,7 +410,7 @@
                     </div>
 
                     <!-- Back Button -->
-                    <a href="index.html" class="back-button" title="Kembali ke Beranda">
+                    <a href="{{ url("/") }}" class="back-button" title="Kembali ke Beranda">
                         <i class="bi bi-arrow-left"></i>
                     </a>
 

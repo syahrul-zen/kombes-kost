@@ -17,6 +17,10 @@ class isMember
     public function handle(Request $request, Closure $next): Response
     {
 
+        if (! Auth::guard('member')->check() && ! Auth::guard('admin')->check() && ! Auth::guard('owner')->check()) {
+            return redirect('/login');
+        }
+
         if (Auth::guard('member')->check()) {
             return $next($request);
         }

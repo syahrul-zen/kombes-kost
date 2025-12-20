@@ -74,7 +74,7 @@
                             <th scope="col">No</th>
                             <th scope="col">Nama</th>
                             <th scope="col">Tipe</th>
-                            <th scope="col">Harga/3 Bulan</th>
+                            <th scope="col">Harga/6 Bulan</th>
                             <th scope="col">Gambar Sampul</th>
                             <th scope="col">Deskripsi</th>
                             <th scope="col">Aksi</th>
@@ -85,8 +85,16 @@
                             <tr>
                                 <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $room->nama }}</td>
-                                <td>{{ $room->tipe }}</td>
-                                <td>Rp {{ number_format($room->harga_per_3_bulan, 0, ",", ".") }}</td>
+
+                                @if ($room->tipe == "A")
+                                    <td>Kamar Besar AC </td>
+                                @elseif ($room->tipe == "B")
+                                    <td>Kamar Besar Non AC </td>
+                                @else
+                                    <td>Kamar Standard</td>
+                                @endif
+
+                                <td>Rp {{ number_format($room->harga_per_6_bulan, 0, ",", ".") }}</td>
                                 <td>
                                     @if ($room->gambar_sampul)
                                         {{-- Tambahkan data-bs-toggle dan onclick untuk memicu modal --}}
@@ -105,6 +113,9 @@
                                     </p>
                                 </td>
                                 <td>
+                                    <a href="{{ url("room/$room->id/show") }}" class="btn btn-success btn-sm"><i
+                                            class="bi bi-house"></i></a>
+
                                     <a href="{{ url("room/$room->id/edit") }}" class="btn btn-warning btn-sm"><i
                                             class="bi bi-pencil-square"></i></a>
 

@@ -635,7 +635,14 @@
                     </div>
                     <div class="order-item">
                         <div class="order-label">Tipe Kamar</div>
-                        <div class="order-value" id="roomType">{{ $booking->room->tipe }}</div>
+
+                        @if ($booking->room->tipe == "A")
+                            <div class="order-value" id="room ype">Kamar Besar AC</div>
+                        @elseif ($booking->room->tipe == "B")
+                            <div class="order-value" id="room ype">Kamar Besar Non AC</div>
+                        @else
+                            <div class="order-value" id="room ype">Kamar Standard</div>
+                        @endif
                     </div>
                     <div class="order-item">
                         <div class="order-label">Nama Kamar</div>
@@ -789,7 +796,7 @@
                 </div>
             </div> --}}
 
-            <form action="{{ url("upload-pembayaran/" . $booking->id) }}" method="post" enctype="multipart/form-data">
+            {{-- <form action="{{ url("upload-pembayaran/" . $booking->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="upload-section">
                     <h2 class="section-title">Upload Bukti Pembayaran</h2>
@@ -828,6 +835,101 @@
                     </button>
                 </div>
 
+            </form> --}}
+
+            <form action="{{ url("upload-pembayaran/" . $booking->id) }}" method="post" enctype="multipart/form-data">
+                @csrf
+
+                <div class="upload-section mb-4">
+                    <h2 class="section-title mb-3">Rincian Pembayaran Transfer</h2>
+
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+
+                            {{-- Membagi Card Body menjadi 2 Kolom --}}
+                            <div class="row align-items-center">
+
+                                {{-- KOLOM KIRI (Logo Saja) --}}
+                                <div class="col-md-4 border-end border-white border-opacity-25 text-center">
+                                    <img src="https://i.pinimg.com/736x/8c/e0/b7/8ce0b75283e344034e99499998fc76e5.jpg"
+                                        alt="Logo Bank Syariah Indonesia (BSI)" style="width: 80px; height: auto;">
+                                    <h5 class="card-title fw-bold m-0 mt-2" style="font-size: 1rem;">
+                                        BANK SYARIAH INDONESIA
+                                    </h5>
+                                </div>
+
+                                {{-- KOLOM KANAN (Nomor Rekening & Nama) --}}
+                                <div class="col-md-8 ps-4">
+                                    <small class="text-uppercase opacity-75">Nomor Rekening</small>
+                                    <h3 class="fw-bolder my-1" id="nomorRekening">
+                                        1088 7755 32
+                                    </h3>
+
+                                    <small class="text-uppercase d-block mt-2 opacity-75">Atas Nama</small>
+                                    <h5 class="fw-bold">
+                                        Kombes Kost
+                                    </h5>
+                                </div>
+                            </div>
+
+                            <hr class="my-3" style="border-top: 1px solid rgba(255, 255, 255, 0.4);">
+
+                            {{-- Tombol Salin di Bawah --}}
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-sm btn-light fw-bold"
+                                    onclick="navigator.clipboard.writeText('1088775532'); alert('Nomor Rekening telah disalin!');">
+                                    <i class="bi bi-clipboard me-2"></i> SALIN NOMOR REKENING
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-3" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i> Mohon transfer sesuai total tagihan.
+                    </div>
+                </div>
+
+                <div class="upload-section">
+
+                    @if ($booking->bukti_pembayaran)
+                        <h2 class="section-title">Upload Ulang Bukti Pembayaran</h2>
+                    @else
+                        <h2 class="section-title">Upload Bukti Pembayaran</h2>
+                    @endif
+
+                    <div class="mb-3">
+                        <label for="paymentProof" class="form-label">
+                            <i class="bi bi-paperclip me-2"></i> Pilih Bukti Pembayaran (JPG, PNG)
+                        </label>
+
+                        <input class="form-control" type="file" id="paymentProof" name="bukti_pembayaran"
+                            max="2000" accept="image/jpeg,image/png" required>
+
+                        <div class="form-text mt-2">
+                            Format yang diizinkan: JPG, PNG. Ukuran maksimum: 2MB.
+                        </div>
+
+                        @error("bukti_pembayaran")
+                            <div class="form-text text-danger">
+                                {{ $message }}
+                            </div>
+                        @enderror
+
+                    </div>
+
+                    <div class="preview-container mt-3" id="previewContainer">
+                        <img id="previewImage" alt="Pratinjau Bukti Pembayaran"
+                            style="max-width: 100%; height: auto; max-height: 200px; border: 1px solid #ddd; border-radius: 4px;">
+                    </div>
+                </div>
+
+                <!-- Payment Button -->
+                <div class="payment-button-container">
+                    <button type="submit" class="btn-confirm-payment" id="confirmPayment">
+                        <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <span>Upload Bukti Pembayaran</span>
+                    </button>
+                </div>
             </form>
         </div>
     </body>

@@ -1,2 +1,3 @@
--   Login Owner
--   middelware
+-   Fasilitas Umum;
+-   Lokasi Strategis (Map)
+-   Footer

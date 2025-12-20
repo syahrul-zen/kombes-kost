@@ -35,34 +35,45 @@
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
+
                         <div class="col-lg-6 mb-3">
                             <label for="tipe-kamar" class="form-label">Tipe Kamar <span class="text-danger">*</span></label>
                             <select class="form-select @error("tipe") is-invalid @enderror" name="tipe" id="tipe-kamar"
                                 required>
-                                <option value="" disabled>Pilih Tipe</option>
-                                @foreach (["A", "B", "C"] as $tipe)
-                                    {{-- Menggunakan $room->tipe untuk menentukan opsi terpilih --}}
-                                    <option value="{{ $tipe }}"
-                                        {{ old("tipe", $room->tipe) == $tipe ? "selected" : "" }}>
-                                        {{ $tipe }}
+                                <option value="" selected disabled>Pilih Tipe</option>
+
+                                @php
+                                    $daftarTipe = [
+                                        "A" => "A (Kamar Besar AC)",
+                                        "B" => "B (Kamar Besar non AC)",
+                                        "C" => "C (Kamar Standard non AC)"
+                                    ];
+                                @endphp
+
+                                @foreach ($daftarTipe as $key => $label)
+                                    <option value="{{ $key }}"
+                                        {{ old("tipe", $room->tipe ?? "") == $key ? "selected" : "" }}>
+                                        {{ $label }}
                                     </option>
                                 @endforeach
                             </select>
+
                             @error("tipe")
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
+
                     </div>
 
                     {{-- Row 2: Harga 3 Bulan --}}
                     <div class="row">
                         <div class="col-lg-12 mb-3">
-                            <label for="harga-3-bulan" class="form-label">Harga Sewa Per (3 Bulan) <span
+                            <label for="harga-6-bulan" class="form-label">Harga Sewa Per (6 Bulan) <span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control @error("harga_per_3_bulan") is-invalid @enderror"
-                                name="harga_per_3_bulan" value="{{ old("harga_per_3_bulan", $room->harga_per_3_bulan) }}"
-                                id="harga-3-bulan" min="0" required>
-                            @error("harga_per_3_bulan")
+                            <input type="number" class="form-control @error("harga_per_6_bulan") is-invalid @enderror"
+                                name="harga_per_6_bulan" value="{{ old("harga_per_6_bulan", $room->harga_per_6_bulan) }}"
+                                id="harga-6-bulan" min="0" required>
+                            @error("harga_per_6_bulan")
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
