@@ -1,6 +1,6 @@
-@extends("Member.Layouts.main")
+@extends('Member.Layouts.main')
 
-@section("container")
+@section('container')
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container-fluid p-0">
@@ -18,7 +18,7 @@
                 <div class="carousel-inner">
                     <!-- Slide 1 -->
                     <div class="carousel-item active">
-                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 1">
+                        <img src="{{ asset('FE/img/gambar_depan_2_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 1">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -35,7 +35,7 @@
 
                     <!-- Slide 2 -->
                     <div class="carousel-item">
-                        <img src="{{ asset("FE/img/gambar_depan_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 2">
+                        <img src="{{ asset('FE/img/gambar_depan_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 2">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -52,7 +52,7 @@
 
                     <!-- Slide 3 -->
                     <div class="carousel-item">
-                        <img src="{{ asset("FE/img/dapur_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 3">
+                        <img src="{{ asset('FE/img/dapur_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 3">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -145,7 +145,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-image-container">
-                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" alt="About Pink Residence"
+                        <img src="{{ asset('FE/img/gambar_depan_2_bagus.png') }}" alt="About Pink Residence"
                             style="height: 400px">
                     </div>
                 </div>
@@ -153,7 +153,7 @@
                     <div class="about-content">
                         <h2 class="section-title">Kombes Kost</h2>
                         <p class="section-subtitle">Hunian idaman untuk mahasiswa dan profesional muda</p>
-                        <p>Pink Residence adalah kost eksklusif yang dirancang khusus untuk memberikan kenyamanan
+                        <p>Kombes Kost adalah kost eksklusif yang dirancang khusus untuk memberikan kenyamanan
                             maksimal bagi penghuninya. Dengan desain modern dan fasilitas lengkap, kami berkomitmen
                             untuk menjadi pilihan terbaik tempat tinggal Anda.</p>
                         <p>Terletak di lokasi yang sangat strategis, Kombes Kost memberikan kemudahan akses ke
@@ -193,7 +193,7 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="room-card">
-                        <img src="{{ asset("FE/img/kamar_1.png") }}" alt="Standard Room">
+                        <img src="{{ asset('FE/img/kamar_1.png') }}" alt="Standard Room">
                         <div class="room-content">
                             <div class="room-type">Besar (A)</div>
                             <h3 class="room-name">Kamar Besar AC</h3>
@@ -242,13 +242,13 @@
                                     <span>Meja Belajar</span>
                                 </div>
                             </div>
-                            <a href="{{ url("view-a") }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url('view-a') }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="room-card">
-                        <img src="{{ asset("FE/img/kamar_2.jpeg") }}" alt="Deluxe Room">
+                        <img src="{{ asset('FE/img/kamar_2.jpeg') }}" alt="Deluxe Room">
                         <div class="room-content">
                             <div class="room-type">Besar (B)</div>
                             <h3 class="room-name">Kamar Besar Non AC</h3>
@@ -301,14 +301,14 @@
                                     <span>Meja Belajar</span>
                                 </div>
                             </div>
-                            <a href="{{ url("view-b") }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url('view-b') }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="room-card">
 
-                        <img src="{{ asset("FE/img/kamar_3.jpeg") }}" alt="Suite Room">
+                        <img src="{{ asset('FE/img/kamar_3.jpeg') }}" alt="Suite Room">
                         <div class="room-content">
                             <div class="room-type">Standard (C)</div>
                             <h3 class="room-name">Kamar Standard</h3>
@@ -365,7 +365,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ url("view-c") }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url('view-c') }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -401,7 +401,7 @@
                         <i class="bi bi-car-front"></i>
                     </div>
                     <h5>Parkir Luas</h5>
-                    <p class="text-muted mb-0">Motor & Mobil</p>
+                    <p class="text-muted mb-0">Motor</p>
                 </div>
                 <div class="facility-item" data-aos="fade-up" data-aos-delay="400">
                     <div class="facility-icon">
@@ -518,11 +518,11 @@
                             Kec. Jambi Luar Kota, Kabupaten Muaro Jambi, Jambi 36361</p>
                         <h5 class="mb-3 mt-4">Dekat Dengan:</h5>
                         <ul class="location-list">
-                            <li><i class="bi bi-check-circle-fill"></i> Universitas Indonesia (15 menit)</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Stasiun MRT (10 menit)</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Mall Gandaria City (5 menit)</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Rumah Sakit (10 menit)</li>
-                            <li><i class="bi bi-check-circle-fill"></i> Supermarket (3 menit)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Universitas Jambi (5 menit)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Universitas Islam Negeri Jambi (8 menit)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Trona (5 menit)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> Jamtos (25 menit)</li>
+                            <li><i class="bi bi-check-circle-fill"></i> JBC (25 menit)</li>
                         </ul>
                     </div>
                 </div>
@@ -533,7 +533,7 @@
     <!-- Contact CTA -->
     <section id="contact" class="contact-cta">
         <div class="container" data-aos="fade-up">
-            <h2>Siap Menjadi Penghuni Pink Residence?</h2>
+            <h2>Siap Menjadi Penghuni Kombes Kost?</h2>
             <p>Hubungi kami sekarang untuk informasi lebih lanjut dan pemesanan kamar</p>
             <a href="tel:+6281234567890" class="btn btn-white btn-lg">Hubungi Kami</a>
         </div>

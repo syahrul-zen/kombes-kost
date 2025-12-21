@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Complain;
 use App\Models\Member;
 use App\Models\Owner;
 use App\Models\User;
@@ -22,11 +23,18 @@ class OwnerController extends Controller
         $pendapatan = Booking::whereYear('created_at', $tahunSaatIni)->where('status_pembayaran', 'success')->sum('total_harga');
         $bookingPending = Booking::where('status_booking', 'pending')->count();
 
+        $complains = Complain::with('booking.member')->where('is_read', 0)
+            ->latest() // Mengambil yang terbaru
+            ->get()
+            ->unique('booking_id'); // Menghapus duplikasi booking_id di hasil koleksi
+
+
         return view('Admin.dashboard', [
             'member' => $member,
             'booking' => $booking,
             'pendapatan' => $pendapatan,
             'bookingPending' => $bookingPending,
+            'complains' => $complains
         ]);
     }
 

@@ -1,6 +1,6 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -9,7 +9,7 @@
                     <h1 class="modal-title fs-5" id="exampleModalLabel">Cetak Laporan Booking</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ url("laporan") }}" method="POST">
+                <form action="{{ url('laporan') }}" method="POST">
                     <div class="modal-body">
 
                         @csrf
@@ -31,9 +31,9 @@
         <h4 class="mb-2"><i class="bi bi-key-fill"></i> Daftar Booking</h4>
 
         {{-- Session Message --}}
-        @if (session()->has("success"))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session("success") }}
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -74,31 +74,34 @@
 
                                 <td>{{ $booking->member->nama_lengkap }}</td>
                                 <td>{{ $booking->room->nama }}</td>
-                                <td>{{ date("d F Y", strtotime($booking->start_date)) }}</td>
-                                <td>{{ date("d F Y", strtotime($booking->end_date)) }}</td>
-                                <td>{{ (strtotime($booking->end_date) - strtotime($booking->start_date)) / (60 * 60 * 24) . " Hari" }}
+                                <td>{{ date('d F Y', strtotime($booking->start_date)) }}</td>
+                                <td>{{ date('d F Y', strtotime($booking->end_date)) }}</td>
+                                <td>{{ (strtotime($booking->end_date) - strtotime($booking->start_date)) / (60 * 60 * 24) . ' Hari' }}
                                 </td>
                                 <td><span
-                                        class="badge rounded-pill {{ $booking->status_pembayaran == "pending" ? "bg-warning" : "bg-success" }} text-white">{{ $booking->status_pembayaran }}</span>
+                                        class="badge rounded-pill {{ $booking->status_pembayaran == 'pending' ? 'bg-warning' : 'bg-success' }} text-white">{{ $booking->status_pembayaran }}</span>
                                 </td>
                                 <td><span
-                                        class="badge rounded-pill {{ $booking->status_booking == "pending"
-                                            ? "bg-warning text-dark"
-                                            : ($booking->status_booking == "confirmed"
-                                                ? "bg-success"
-                                                : ($booking->status_booking == "check_in"
-                                                    ? "bg-primary"
-                                                    : ($booking->status_booking == "check_out"
-                                                        ? "bg-secondary"
-                                                        : "bg-info"))) }}">{{ $booking->status_booking }}</span>
+                                        class="badge rounded-pill {{ $booking->status_booking == 'pending'
+                                            ? 'bg-warning text-dark'
+                                            : ($booking->status_booking == 'confirmed'
+                                                ? 'bg-success'
+                                                : ($booking->status_booking == 'check_in'
+                                                    ? 'bg-primary'
+                                                    : ($booking->status_booking == 'check_out'
+                                                        ? 'bg-secondary'
+                                                        : 'bg-info'))) }}">{{ $booking->status_booking }}</span>
                                 </td>
 
                                 <td>
+                                    <a href="{{ url('complain-admin/' . $booking->id) }}" class="btn btn-info btn-sm"><i
+                                            class="bi bi-chat-dots"></i></a>
+
                                     <a href="{{ url("booking-admin/$booking->id") }}" class="btn btn-warning btn-sm"><i
                                             class="bi bi-pencil-square"></i></a>
 
                                     <form action="{{ url("booking-admin/$booking->id") }}" method="POST" class="d-inline">
-                                        @method("DELETE")
+                                        @method('DELETE')
                                         @csrf
                                         <button class="btn btn-danger btn-sm"
                                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i

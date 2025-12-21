@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\ComplainController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RoomController;
@@ -72,8 +73,8 @@ Route::controller(RoomController::class)->group(function () {
 });
 
 Route::get('/booking', function () {
-    return view('Member.booking')->middleware('isMember');
-});
+    return view('Member.booking');
+})->middleware('isMember');
 
 Route::get('/register', [MemberController::class, 'create']);
 
@@ -115,3 +116,8 @@ Route::controller(OwnerController::class)->group(function () {
 });
 
 Route::get('/room/{room}/show', [BookingController::class, 'check']);
+Route::post("/edit-profile-member/{member}", [MemberController::class, 'updateMember']);
+Route::get('/complain/{booking}', [ComplainController::class, 'chat'])->middleware('isMember');
+Route::post("/complain", [ComplainController::class, 'store']);
+
+Route::get('/complain-admin/{booking}', [ComplainController::class, 'chatAdmin'])->middleware('isAdminOwner');

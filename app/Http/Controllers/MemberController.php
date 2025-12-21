@@ -125,14 +125,61 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+
+        $nama = $member->nama_lengkap;
+
+        File::delete('File/' . $member->foto);
+
+        $member->delete();
+
+        return back()->with('success', 'Berhasil menghapus data member ' . $nama);
     }
 
     public function profile()
     {
-
         $data = Auth::guard('member')->user();
 
         return view('Member.profile', ['member' => $data]);
+    }
+
+    public function updateMember(Request $request, Member $member) {
+        $rules = [
+            'nama_lengkap' => 'required|max:200',
+            'alamat' => 'required|max:200',
+            'foto' => 'max:2000',
+        ];
+
+        if ($request->password) {
+            $rules['password'] = 'max:20';
+        }
+
+        if ($member->email != $request->email) {
+            $rules['email'] = 'required|max:100|email:dns|unique:admin|unique:members|unique:owners';
+        }
+
+        if ($member->no_wa != $request->no_wa) {
+            $rules['no_wa'] = 'required|max:20|unique:members';
+        }
+
+        $validated = $request->validate($rules);
+
+        if ($request->password) {
+            $validated['password'] = bcrypt($request->password);
+        }
+
+        $foto = $request->file('foto');
+
+        if ($foto) {
+
+            $rename = uniqid().'_'.$foto->getClientOriginalName();
+            $validated['foto'] = $rename;
+            $locationFile = 'File';
+            $foto->move($locationFile, $rename);
+            File::delete($locationFile.'/'.$member->foto);
+        }
+
+        $member->update($validated);
+
+        return back()->with('success', 'Data member berhasil di update');
     }
 }

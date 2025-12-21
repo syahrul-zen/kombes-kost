@@ -20,6 +20,12 @@
                     </div>
                 @endif
 
+                @session('success')
+                    <div class="alert alert-danger">
+                        {{ session('success') }}
+                    </div>
+                @endsession
+
                 {{-- PENTING: Tambahkan enctype="multipart/form-data" untuk upload file --}}
                 <form action="{{ url('update-admin/' . $admin->id) }}" method="POST">
                     @csrf

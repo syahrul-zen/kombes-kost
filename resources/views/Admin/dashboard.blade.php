@@ -1,6 +1,6 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <!-- Sale & Revenue Start -->
     <div class="container-fluid px-4 pt-4">
         <div class="row g-4">
@@ -40,7 +40,7 @@
                     <i class="fas fa-money-check-alt fa-3x text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Pendapatan Tahun Ini</p>
-                        <h6 class="mb-0">{{ "Rp. " . number_format($pendapatan, 0, ",", ".") }}</h6>
+                        <h6 class="mb-0">{{ 'Rp. ' . number_format($pendapatan, 0, ',', '.') }}</h6>
                     </div>
                 </div>
             </div>
@@ -73,78 +73,40 @@
     </div> --}}
     <!-- Sales Chart End -->
 
-    {{-- <!-- Recent Sales Start -->
+
     <div class="container-fluid px-4 pt-4">
         <div class="bg-light rounded p-4 text-center">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Recent Salse</h6>
-                <a href="">Show All</a>
+                <h6 class="mb-0">Complain</h6>
             </div>
             <div class="table-responsive">
                 <table class="table-bordered table-hover mb-0 table text-start align-middle">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Invoice</th>
-                            <th scope="col">Customer</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Status</th>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Kamar</th>
+                            <th scope="col">Waktu</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
-                        <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
-                            <td>01 Jan 2045</td>
-                            <td>INV-0123</td>
-                            <td>Jhon Doe</td>
-                            <td>$123</td>
-                            <td>Paid</td>
-                            <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                        </tr>
+                        @foreach ($complains as $complain)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $complain->booking->member->nama_lengkap }}</td>
+                                <td>{{ $complain->booking->room->nama }}</td>
+                                <td>{{ $complain->created_at->diffForHumans() }}</td>
+                                <td><a href="{{ url('complain-admin/' . $complain->booking->id) }}"
+                                        class="btn btn-info btn-sm"><i class="bi bi-chat-dots"></i></a></td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-    <!-- Recent Sales End --> --}}
+    <!-- Recent Sales End -->
 
     {{-- <!-- Widgets Start -->
     <div class="container-fluid px-4 pt-4">

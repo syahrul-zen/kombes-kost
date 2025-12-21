@@ -29,4 +29,8 @@ class Booking extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function complains() {
+        return $this->hasMany(Complain::class);
+    }
 }

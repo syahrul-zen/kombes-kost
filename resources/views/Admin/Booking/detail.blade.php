@@ -1,15 +1,70 @@
 {{-- Status Pembayaran --}}
 {{-- Status Booking --}}
 
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+
+
+@section('container')
+    <style>
+        /* body {
+                                                                                                    background-color: #f0f2f5;
+                                                                                                }
+                                                                                         */
+        .chat-container {
+            /* max-width: 450px; */
+            margin: 50px auto;
+        }
+
+        .chat-body {
+            height: 500px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        /* Balon Chat */
+        .msg {
+            max-width: 75%;
+            padding: 10px 15px;
+            border-radius: 18px;
+            font-size: 0.9rem;
+        }
+
+        /* KIRI: Sekarang Berwarna Biru */
+        .msg-left {
+            background-color: #007bff;
+            color: white;
+            border-bottom-left-radius: 2px;
+        }
+
+        /* KANAN: Sekarang Polos (Putih dengan Border) */
+        .msg-right {
+            background-color: #f8f9fa;
+            color: #333;
+            border: 1px solid #dee2e6;
+            border-bottom-right-radius: 2px;
+        }
+
+        .avatar {
+            width: 35px;
+            height: 35px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .time-text {
+            font-size: 0.65rem;
+            margin-top: 4px;
+            color: #adb5bd;
+        }
+    </style>
     <div class="col-12">
         <h4 class="mb-2"><i class="bi bi-box-arrow-up"></i> Detail Pemesanan</h4>
         {{-- Session Message --}}
-        @if (session()->has("success"))
+        @if (session()->has('success'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session("success") }}
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
@@ -17,7 +72,7 @@
         <div class="bg-light h-100 rounded p-4">
             <div class="d-flex gap-2">
 
-                <a href="{{ url("booking-admin") }}" class="btn btn-info mb-3"><i
+                <a href="{{ url('booking-admin') }}" class="btn btn-info mb-3"><i
                         class="bi bi-arrow-left-circle me-2"></i>Kembali</a>
 
                 <!-- Button trigger modal -->
@@ -27,7 +82,7 @@
                     <i class="bi bi-wallet-fill me-2"></i>Status Pembayaran
                 </div>
 
-                <form action="{{ url("set-status-pembayaran/" . $booking->id) }}" method="POST">
+                <form action="{{ url('set-status-pembayaran/' . $booking->id) }}" method="POST">
                     @csrf
 
                     <!-- Modal -->
@@ -43,7 +98,7 @@
 
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_pembayaran"
-                                                id="statusPending" value="pending" @checked($booking->status_pembayaran == "pending") required>
+                                                id="statusPending" value="pending" @checked($booking->status_pembayaran == 'pending') required>
                                             <label class="form-check-label" for="statusPending">
                                                 <span class="badge bg-warning text-dark">Pending</span>
                                             </label>
@@ -51,7 +106,7 @@
 
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_pembayaran"
-                                                id="statusSuccess" value="success" @checked($booking->status_pembayaran == "success") required>
+                                                id="statusSuccess" value="success" @checked($booking->status_pembayaran == 'success') required>
                                             <label class="form-check-label" for="statusSuccess">
                                                 <span class="badge bg-success">Success</span>
                                             </label>
@@ -73,7 +128,7 @@
                     <i class="bi bi-journal-text"></i> Status Booking
                 </button>
 
-                <form action="{{ url("set-status-pemesanan/" . $booking->id) }}" method="POST">
+                <form action="{{ url('set-status-pemesanan/' . $booking->id) }}" method="POST">
                     @csrf
 
                     <div class="modal fade" id="updateStatusModal" tabindex="-1" aria-labelledby="modalLabel"
@@ -96,7 +151,7 @@
                                         {{-- 1. PENDING --}}
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_booking"
-                                                id="statusPending" value="pending" @checked($booking->status_booking == "pending") required>
+                                                id="statusPending" value="pending" @checked($booking->status_booking == 'pending') required>
                                             <label class="form-check-label" for="statusPending">
                                                 <span class="badge bg-warning text-dark">Pending</span>
                                             </label>
@@ -105,7 +160,7 @@
                                         {{-- 2. CONFIRMED --}}
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_booking"
-                                                id="statusConfirmed" value="confirmed" @checked($booking->status_booking == "confirmed")
+                                                id="statusConfirmed" value="confirmed" @checked($booking->status_booking == 'confirmed')
                                                 required>
                                             <label class="form-check-label" for="statusConfirmed">
                                                 <span class="badge bg-success">Confirmed</span>
@@ -115,7 +170,7 @@
                                         {{-- 3. CHECK_IN --}}
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_booking"
-                                                id="statusCheckIn" value="check_in" @checked($booking->status_booking == "check_in") required>
+                                                id="statusCheckIn" value="check_in" @checked($booking->status_booking == 'check_in') required>
                                             <label class="form-check-label" for="statusCheckIn">
                                                 <span class="badge bg-primary">Check In</span>
                                             </label>
@@ -124,7 +179,7 @@
                                         {{-- 4. CHECK_OUT --}}
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="status_booking"
-                                                id="statusCheckOut" value="check_out" @checked($booking->status_booking == "check_out")
+                                                id="statusCheckOut" value="check_out" @checked($booking->status_booking == 'check_out')
                                                 required>
                                             <label class="form-check-label" for="statusCheckOut">
                                                 <span class="badge bg-secondary">Check Out</span>
@@ -172,25 +227,25 @@
                     <tr>
                         <th scope="row" style="width: 30%">Tanggal Mulai</th>
                         <td style="width: 5%">:</td>
-                        <td style="width: 65%">{{ date("d F Y", strtotime($booking->start_date)) }}</td>
+                        <td style="width: 65%">{{ date('d F Y', strtotime($booking->start_date)) }}</td>
                     </tr>
                     <tr>
                         <th scope="row" style="width: 30%">Tanggal Selesai</th>
                         <td style="width: 5%">:</td>
-                        <td style="width: 65%">{{ date("d F Y", strtotime($booking->end_date)) }}</td>
+                        <td style="width: 65%">{{ date('d F Y', strtotime($booking->end_date)) }}</td>
                     </tr>
                     <tr>
                         <th scope="row" style="width: 30%">Durasi Sewa</th>
                         <td style="width: 5%">:</td>
                         <td style="width: 65%">
-                            {{ (strtotime($booking->end_date) - strtotime($booking->start_date)) / (60 * 60 * 24) . " Hari" }}
+                            {{ (strtotime($booking->end_date) - strtotime($booking->start_date)) / (60 * 60 * 24) . ' Hari' }}
                         </td>
                     </tr>
                     <tr>
                         <th scope="row" style="width: 30%">Total Harga</th>
                         <td style="width: 5%">:</td>
                         <td style="width: 65%">
-                            {{ "Rp.     " . number_format($booking->total_harga, 0, ",", ".") }}
+                            {{ 'Rp.     ' . number_format($booking->total_harga, 0, ',', '.') }}
                         </td>
                     </tr>
                     <tr>
@@ -198,7 +253,7 @@
                         <td style="width: 5%">:</td>
                         <td style="width: 65%">
                             <span
-                                class="badge rounded-pill {{ $booking->status_pembayaran == "pending" ? "bg-warning" : "bg-success" }} text-white">{{ $booking->status_pembayaran }}</span>
+                                class="badge rounded-pill {{ $booking->status_pembayaran == 'pending' ? 'bg-warning' : 'bg-success' }} text-white">{{ $booking->status_pembayaran }}</span>
                         </td>
                     </tr>
                     <tr>
@@ -210,15 +265,15 @@
                                 class="badge rounded-pill {{ $booking->status_booking == "pending" ? "bg-warning" : "bg-success" }} text-dark">{{ $booking->status_booking }}</span> --}}
 
                             <span
-                                class="badge rounded-pill {{ $booking->status_booking == "pending"
-                                    ? "bg-warning text-dark"
-                                    : ($booking->status_booking == "confirmed"
-                                        ? "bg-success"
-                                        : ($booking->status_booking == "check_in"
-                                            ? "bg-primary"
-                                            : ($booking->status_booking == "check_out"
-                                                ? "bg-secondary"
-                                                : "bg-info"))) }}">
+                                class="badge rounded-pill {{ $booking->status_booking == 'pending'
+                                    ? 'bg-warning text-dark'
+                                    : ($booking->status_booking == 'confirmed'
+                                        ? 'bg-success'
+                                        : ($booking->status_booking == 'check_in'
+                                            ? 'bg-primary'
+                                            : ($booking->status_booking == 'check_out'
+                                                ? 'bg-secondary'
+                                                : 'bg-info'))) }}">
                                 {{ $booking->status_booking }}
                             </span>
                         </td>
@@ -228,11 +283,11 @@
                         <td style="width: 5%">:</td>
 
                         @if ($booking->bukti_pembayaran)
-                            <td style="width: 65%"><a href="{{ asset("File/" . $booking->bukti_pembayaran) }}"
+                            <td style="width: 65%"><a href="{{ asset('File/' . $booking->bukti_pembayaran) }}"
                                     class="btn btn-info btn-sm"><i class="bi bi-cash"></i></a></td>
                         @else
                             <td style="width: 65%"><span
-                                    class="badge rounded-pill bg-danger text-white">{{ "Belum melakukan pembayaran" }}</span>
+                                    class="badge rounded-pill bg-danger text-white">{{ 'Belum melakukan pembayaran' }}</span>
                             </td>
                         @endif
 
@@ -240,6 +295,63 @@
 
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white py-3 border-bottom">
+                <div class="d-flex align-items-center">
+                    <img src="{{ asset('File/' . $booking->member->foto) }}" class="avatar me-2">
+                    <h6 class="mb-0">{{ $booking->member->nama_lengkap }}</h6>
+                </div>
+            </div>
+
+            <div class="card-body chat-body">
+
+                @foreach ($booking->complains as $complain)
+                    @if ($complain->is_admin)
+                        <div class="d-flex flex-column align-items-start mb-4">
+                            <div class="d-flex align-items-end">
+                                <img src="{{ asset('FE/img/admin.png') }}" class="avatar me-2" alt="Admin">
+                                <div class="msg msg-left shadow-sm">
+                                    {{ $complain->chat }}
+                                </div>
+                            </div>
+                            <small class="time-text ms-5">{{ $complain->created_at->diffForHumans() }}</small>
+                        </div>
+                    @else
+                        <div class="d-flex flex-column align-items-end mb-4">
+                            <div class="d-flex align-items-end">
+                                <div class="msg msg-right shadow-sm">
+                                    {{ $complain->chat }}
+                                </div>
+                                <img src="{{ asset('File/' . $booking->member->foto) }}" class="avatar ms-2"
+                                    alt="User">
+                            </div>
+                            <small class="time-text ms-5">{{ $complain->created_at->diffForHumans() }}</small>
+                        </div>
+                    @endif
+                @endforeach
+
+            </div>
+
+            <div class="card-footer bg-white p-3">
+
+                <form action="{{ url('/complain') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="is_admin" value="1">
+                    <input type="hidden" name="is_read" value="0">
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+
+
+                    <div class="input-group">
+                        <input type="text" class="form-control border-light bg-light" name="chat"
+                            placeholder="Tulis pesan..." maxlength="240">
+                        <button class="btn btn-primary" type="submit">Kirim</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

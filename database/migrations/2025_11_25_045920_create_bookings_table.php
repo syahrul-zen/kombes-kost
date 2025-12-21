@@ -22,8 +22,8 @@ return new class extends Migration
             $table->enum('status_booking', ['pending', 'confirmed', 'check_in', 'check_out'])->default('pending');
             $table->string('bukti_pembayaran')->nullable();
 
-            $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
-            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
+            $table->foreignId('member_id')->constrained('members')->onDelete('cascade')->cascadeOnUpdate();
+            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade')->cascadeOnUpdate();
             $table->timestamps();
         });
     }
