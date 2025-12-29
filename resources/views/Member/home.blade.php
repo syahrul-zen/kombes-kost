@@ -1,6 +1,6 @@
-@extends('Member.Layouts.main')
+@extends("Member.Layouts.main")
 
-@section('container')
+@section("container")
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container-fluid p-0">
@@ -18,7 +18,7 @@
                 <div class="carousel-inner">
                     <!-- Slide 1 -->
                     <div class="carousel-item active">
-                        <img src="{{ asset('FE/img/gambar_depan_2_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 1">
+                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 1">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -35,7 +35,7 @@
 
                     <!-- Slide 2 -->
                     <div class="carousel-item">
-                        <img src="{{ asset('FE/img/gambar_depan_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 2">
+                        <img src="{{ asset("FE/img/gambar_depan_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 2">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -52,7 +52,7 @@
 
                     <!-- Slide 3 -->
                     <div class="carousel-item">
-                        <img src="{{ asset('FE/img/dapur_bagus.png') }}" class="d-block w-100" alt="Kombes Kost 3">
+                        <img src="{{ asset("FE/img/dapur_bagus.png") }}" class="d-block w-100" alt="Kombes Kost 3">
                         <div class="carousel-overlay"></div>
                         <div class="carousel-caption d-none d-md-block">
                             <div class="hero-content">
@@ -145,7 +145,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <div class="about-image-container">
-                        <img src="{{ asset('FE/img/gambar_depan_2_bagus.png') }}" alt="About Pink Residence"
+                        <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" alt="About Pink Residence"
                             style="height: 400px">
                     </div>
                 </div>
@@ -193,7 +193,7 @@
             <div class="row g-4">
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="room-card">
-                        <img src="{{ asset('FE/img/kamar_1.png') }}" alt="Standard Room">
+                        <img src="{{ asset("FE/img/kamar_1.png") }}" alt="Standard Room">
                         <div class="room-content">
                             <div class="room-type">Besar (A)</div>
                             <h3 class="room-name">Kamar Besar AC</h3>
@@ -242,13 +242,13 @@
                                     <span>Meja Belajar</span>
                                 </div>
                             </div>
-                            <a href="{{ url('view-a') }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url("view-a") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
                     <div class="room-card">
-                        <img src="{{ asset('FE/img/kamar_2.jpeg') }}" alt="Deluxe Room">
+                        <img src="{{ asset("FE/img/kamar_2.jpeg") }}" alt="Deluxe Room">
                         <div class="room-content">
                             <div class="room-type">Besar (B)</div>
                             <h3 class="room-name">Kamar Besar Non AC</h3>
@@ -301,14 +301,14 @@
                                     <span>Meja Belajar</span>
                                 </div>
                             </div>
-                            <a href="{{ url('view-b') }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url("view-b") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="room-card">
 
-                        <img src="{{ asset('FE/img/kamar_3.jpeg') }}" alt="Suite Room">
+                        <img src="{{ asset("FE/img/kamar_3.jpeg") }}" alt="Suite Room">
                         <div class="room-content">
                             <div class="room-type">Standard (C)</div>
                             <h3 class="room-name">Kamar Standard</h3>
@@ -365,7 +365,7 @@
                                 </div>
                             </div>
 
-                            <a href="{{ url('view-c') }}" class="btn btn-pink w-100">Selengkapnya</a>
+                            <a href="{{ url("view-c") }}" class="btn btn-pink w-100">Selengkapnya</a>
                         </div>
                     </div>
                 </div>
@@ -446,42 +446,42 @@
     <section id="gallery" class="gallery-section">
         <div class="container">
             <div class="mb-5 text-center" data-aos="fade-up">
-                <h2 class="section-title">Galeri Pink Residence</h2>
+                <h2 class="section-title">Galeri Kombes Kost</h2>
                 <p class="section-subtitle">Lihat suasana nyaman di kost kami</p>
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://picsum.photos/seed/gallery1/400/300" alt="Gallery 1">
+                    <img src="{{ asset("FE/img/gambar_depan_bagus.png") }}" alt="Gallery 1">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://picsum.photos/seed/gallery2/400/300" alt="Gallery 2">
+                    <img src="{{ asset("FE/img/gambar_depan_2_bagus.png") }}" alt="Gallery 2">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="300">
-                    <img src="https://picsum.photos/seed/gallery3/400/300" alt="Gallery 3">
+                    <img src="{{ asset("FE/img/kamar_1.png") }}" alt="Gallery 3">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="400">
-                    <img src="https://picsum.photos/seed/gallery4/400/300" alt="Gallery 4">
+                    <img src="{{ asset("FE/img/dapur_bagus.png") }}" alt="Gallery 4">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="500">
-                    <img src="https://picsum.photos/seed/gallery5/400/300" alt="Gallery 5">
+                    <img src="{{ asset("FE/img/ruang_tamu.jpeg") }}" alt="Gallery 5">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
                 </div>
                 <div class="gallery-item" data-aos="zoom-in" data-aos-delay="600">
-                    <img src="https://picsum.photos/seed/gallery6/400/300" alt="Gallery 6">
+                    <img src="{{ asset("FE/img/peraturan kost.jpeg") }}" alt="Gallery 6">
                     <div class="gallery-overlay">
                         <i class="bi bi-zoom-in text-white" style="font-size: 2rem;"></i>
                     </div>
