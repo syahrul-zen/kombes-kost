@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Member;
+use App\Models\User;
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -128,21 +129,22 @@ class MemberController extends Controller
 
         $nama = $member->nama_lengkap;
 
-        File::delete('File/' . $member->foto);
+        File::delete('File/'.$member->foto);
 
         $member->delete();
 
-        return back()->with('success', 'Berhasil menghapus data member ' . $nama);
+        return back()->with('success', 'Berhasil menghapus data member '.$nama);
     }
 
     public function profile()
     {
         $data = Auth::guard('member')->user();
 
-        return view('Member.profile', ['member' => $data]);
+        return view('Member.profile', ['member' => $data, 'wa_admin' => User::select('no_wa')->first()]);
     }
 
-    public function updateMember(Request $request, Member $member) {
+    public function updateMember(Request $request, Member $member)
+    {
         $rules = [
             'nama_lengkap' => 'required|max:200',
             'alamat' => 'required|max:200',

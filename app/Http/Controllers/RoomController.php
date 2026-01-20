@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -162,6 +163,7 @@ class RoomController extends Controller
     {
         return view('Member.view-a', [
             'rooms' => Room::where('tipe', 'A')->get(),
+            'wa_admin' => User::select('no_wa')->first(),
         ]);
     }
 
@@ -169,6 +171,7 @@ class RoomController extends Controller
     {
         return view('Member.view-b', [
             'rooms' => Room::where('tipe', 'B')->get(),
+            'wa_admin' => User::select('no_wa')->first(),
         ]);
     }
 
@@ -176,6 +179,7 @@ class RoomController extends Controller
     {
         return view('Member.view-c', [
             'rooms' => Room::where('tipe', 'C')->get(),
+            'wa_admin' => User::select('no_wa')->first(),
         ]);
     }
 }

@@ -70,7 +70,11 @@ class BookingController extends Controller
      */
     public function destroy(Booking $booking)
     {
-        //
+        File::delete('File/'.$booking->bukti_pembayaran);
+
+        $booking->delete();
+
+        return back()->with('success', 'Berhasil menghapus data booking');
     }
 
     public function prevBooking(Room $room)

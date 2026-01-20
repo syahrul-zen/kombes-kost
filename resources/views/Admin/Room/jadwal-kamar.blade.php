@@ -18,7 +18,7 @@
 
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <th>ID Booking</th>
                             <th>Periode Booking</th>
                             <th>Total Harga</th>
                             <th>Status Booking</th>

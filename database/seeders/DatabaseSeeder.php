@@ -45,6 +45,36 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
 
+        \App\Models\Room::create([
+            'nama' => 'Kamar 1',
+            'tipe' => 'A',
+            'harga_per_6_bulan' => 6000000,
+            'gambar_sampul' => 'A1.png',
+            'gambar_2' => 'A2.png',
+            'gambar_3' => 'WC.jpeg',
+            'deskripsi' => '-',
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 2',
+            'tipe' => 'B',
+            'harga_per_6_bulan' => 4500000,
+            'gambar_sampul' => 'B1.jpeg',
+            'gambar_2' => 'B2.jpeg',
+            'gambar_3' => 'WC.jpeg',
+            'deskripsi' => '-',
+        ]);
+
+        \App\Models\Room::create([
+            'nama' => 'Kamar 3',
+            'tipe' => 'C',
+            'harga_per_6_bulan' => 3500000,
+            'gambar_sampul' => 'C1.jpeg',
+            'gambar_2' => 'C2.jpeg',
+            'gambar_3' => 'WC.jpeg',
+            'deskripsi' => '-',
+        ]);
+
         // ==========================================
 
     }

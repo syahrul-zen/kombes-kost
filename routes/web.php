@@ -7,6 +7,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\RoomController;
 use App\Models\Booking;
+use App\Models\User;
 use illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -63,7 +64,11 @@ Route::get('/', function () {
         return redirect('/dashboard');
     }
 
-    return view('Member.home');
+    // return User::select('no_wa')->first();
+
+    return view('Member.home', [
+        'wa_admin' => User::select('no_wa')->first(),
+    ]);
 });
 
 Route::controller(RoomController::class)->group(function () {
@@ -93,6 +98,7 @@ Route::post('/upload-pembayaran/{booking}', [BookingController::class, 'uploadPe
 Route::controller(BookingController::class)->group(function () {
     Route::get('/booking-admin', 'index')->middleware('isAdminOwner');
     Route::get('/booking-admin/{booking}', 'show')->middleware('isAdminOwner');
+    Route::delete('/booking-admin/{booking}', 'destroy')->middleware('isAdminOwner');
     Route::post('/set-status-pembayaran/{booking}', 'setStatusPembayaran')->middleware('isAdminOwner');
     Route::post('/set-status-pemesanan/{booking}', 'setStatusPemesanan')->middleware('isAdminOwner');
     Route::post('/laporan', 'laporan')->middleware('isAdminOwner');
@@ -116,8 +122,8 @@ Route::controller(OwnerController::class)->group(function () {
 });
 
 Route::get('/room/{room}/show', [BookingController::class, 'check']);
-Route::post("/edit-profile-member/{member}", [MemberController::class, 'updateMember']);
+Route::post('/edit-profile-member/{member}', [MemberController::class, 'updateMember']);
 Route::get('/complain/{booking}', [ComplainController::class, 'chat'])->middleware('isMember');
-Route::post("/complain", [ComplainController::class, 'store']);
+Route::post('/complain', [ComplainController::class, 'store']);
 
 Route::get('/complain-admin/{booking}', [ComplainController::class, 'chatAdmin'])->middleware('isAdminOwner');

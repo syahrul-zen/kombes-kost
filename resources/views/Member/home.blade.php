@@ -535,7 +535,7 @@
         <div class="container" data-aos="fade-up">
             <h2>Siap Menjadi Penghuni Kombes Kost?</h2>
             <p>Hubungi kami sekarang untuk informasi lebih lanjut dan pemesanan kamar</p>
-            <a href="tel:+6281234567890" class="btn btn-white btn-lg">Hubungi Kami</a>
+            <a href="{{ url("https://wa.me/" . $wa_admin->no_wa) }}" class="btn btn-white btn-lg">Hubungi Kami</a>
         </div>
     </section>
 @endsection
