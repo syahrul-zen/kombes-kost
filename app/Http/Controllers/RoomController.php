@@ -103,6 +103,7 @@ class RoomController extends Controller
             'gambar_2' => 'image|max:2100',
             'gambar_3' => 'image|max:2100',
             'deskripsi' => 'max:1000',
+            'is_availibe' => 'required'
         ];
 
         if ($request->nama != $room->nama) {
@@ -159,10 +160,30 @@ class RoomController extends Controller
         return redirect('/room')->with('success', 'Berhasil menghapus data kamar');
     }
 
-    public function viewA()
+    // public function viewA()
+    // {
+    //     return view('Member.view-a', [
+    //         'rooms' => Room::where('tipe', 'A')->get(),
+    //         'wa_admin' => User::select('no_wa')->first(),
+    //     ]);
+    // }
+
+    public function viewA(Request $request) // Tambahkan parameter Request $request
     {
+        // Mulai query dengan filter tipe 'A'
+        $query = Room::where('tipe', 'A');
+
+        // Cek apakah ada filter status di URL
+        if ($request->has('status')) {
+            if ($request->status == 'tersedia') {
+                $query->where('is_availibe', 1);
+            } elseif ($request->status == 'dibooking') {
+                $query->where('is_availibe', 0);
+            }
+        }
+
         return view('Member.view-a', [
-            'rooms' => Room::where('tipe', 'A')->get(),
+            'rooms' => $query->get(),
             'wa_admin' => User::select('no_wa')->first(),
         ]);
     }
@@ -181,5 +202,15 @@ class RoomController extends Controller
             'rooms' => Room::where('tipe', 'C')->get(),
             'wa_admin' => User::select('no_wa')->first(),
         ]);
+    }
+
+    public function updateKetersediaanKamar(Request $request, Room $room) {
+        $validated = $request->validate([
+            'is_availibe' => 'required'
+        ]);
+
+        $room->update($validated);
+
+        return back()->with('success', "Berhasil mengubah status kamar");
     }
 }

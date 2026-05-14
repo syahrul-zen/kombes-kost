@@ -1,6 +1,6 @@
-@extends("Member.Layouts.main")
+@extends('Member.Layouts.main')
 
-@section("container")
+@section('container')
     <section id="rooms" class="kost-section" style="margin-top: 40px">
         <div class="container">
             <div class="mb-5 text-center" data-aos="fade-up">
@@ -11,16 +11,32 @@
 
                 @foreach ($rooms as $room)
                     <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
-                        <div class="kost-card">
+                        <div class="kost-card" style="position: relative;">
+
+                            <!-- Label Status Ketersediaan -->
+                            <div style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+                                @if ($room->is_availibe)
+                                    <span class="badge bg-success text-white px-3 py-2"
+                                        style="border-radius: 20px; font-weight: 600;">
+                                        <i class="bi bi-check-circle-fill me-1"></i> Tersedia
+                                    </span>
+                                @else
+                                    <span class="badge bg-danger text-white px-3 py-2"
+                                        style="border-radius: 20px; font-weight: 600;">
+                                        <i class="bi bi-x-circle-fill me-1"></i> Telah Dibooking
+                                    </span>
+                                @endif
+                            </div>
+
                             {{-- Menggunakan .kost-card-img --}}
-                            <img src="{{ asset("File/" . $room->gambar_sampul) }}" alt="Standard Room"
+                            <img src="{{ asset('File/' . $room->gambar_sampul) }}" alt="Standard Room"
                                 class="kost-card-img">
                             <div class="kost-content">
                                 {{-- <div class="kost-type">Standard (A)</div> --}}
                                 <h3 class="kost-name">{{ $room->nama }}</h3>
                                 {{-- <p class="text-muted">Kamar nyaman dengan fasilitas dasar lengkap</p> --}}
                                 <div class="kost-price">
-                                    {{ "Rp. " . number_format($room->harga_per_6_bulan, 0, ",", ".") }}<span
+                                    {{ 'Rp. ' . number_format($room->harga_per_6_bulan, 0, ',', '.') }}<span
                                         class="text-muted" style="font-size: 1rem;">/ 6 bulan</span></div>
                                 <div class="kost-features">
                                     <div class="kost-feature">
@@ -37,7 +53,7 @@
                                     </div>
 
                                 </div>
-                                <a href="{{ url("show-room/" . $room->id) }}" class="btn btn-pink"
+                                <a href="{{ url('show-room/' . $room->id) }}" class="btn btn-pink"
                                     style="width: 100%;">Selengkapnya</a>
 
                             </div>

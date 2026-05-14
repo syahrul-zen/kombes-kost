@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('gambar_sampul');
             $table->string('gambar_2')->nullable();
             $table->string('gambar_3')->nullable();
+            $table->boolean('is_availibe')->default(1);
             $table->text('deskripsi')->nullable();
             $table->timestamps();
         });

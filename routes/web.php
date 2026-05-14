@@ -28,6 +28,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('room', RoomController::class)->middleware('isAdminOwner');
 Route::resource('member', MemberController::class)->middleware('isAdminOwner');
+
+Route::patch('set-status-ketersediaan/{room}', [RoomController::class, 'updateKetersediaanKamar'])->middleware('isAdminOwner');
+
 // Route::resource('booking', BookingController::class);
 
 // Route::get('/booking/{bookingg}', [BookingController::class, 'prevBooking']);

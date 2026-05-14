@@ -1,6 +1,6 @@
-@extends("Admin.Layouts.main")
+@extends('Admin.Layouts.main')
 
-@section("container")
+@section('container')
     <div class="row g-4">
         <div class="col-sm-12">
             <div class="bg-light h-100 rounded p-4">
@@ -21,44 +21,44 @@
                 @endif
 
                 {{-- PENTING: Tambahkan enctype="multipart/form-data" untuk upload file --}}
-                <form action="{{ route("room.update", $room->id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('room.update', $room->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    @method("PUT") {{-- Wajib untuk method update Laravel --}}
+                    @method('PUT') {{-- Wajib untuk method update Laravel --}}
 
                     {{-- Row 1: Nama dan Tipe Kamar --}}
                     <div class="row">
                         <div class="col-lg-6 mb-3">
                             <label for="nama-kamar" class="form-label">Nama Kamar <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control @error("nama") is-invalid @enderror" name="nama"
-                                value="{{ old("nama", $room->nama) }}" id="nama-kamar" autocomplete="off" required>
-                            @error("nama")
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror" name="nama"
+                                value="{{ old('nama', $room->nama) }}" id="nama-kamar" autocomplete="off" required>
+                            @error('nama')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="col-lg-6 mb-3">
                             <label for="tipe-kamar" class="form-label">Tipe Kamar <span class="text-danger">*</span></label>
-                            <select class="form-select @error("tipe") is-invalid @enderror" name="tipe" id="tipe-kamar"
+                            <select class="form-select @error('tipe') is-invalid @enderror" name="tipe" id="tipe-kamar"
                                 required>
                                 <option value="" selected disabled>Pilih Tipe</option>
 
                                 @php
                                     $daftarTipe = [
-                                        "A" => "A (Kamar Besar AC)",
-                                        "B" => "B (Kamar Besar non AC)",
-                                        "C" => "C (Kamar Standard non AC)"
+                                        'A' => 'A (Kamar Besar AC)',
+                                        'B' => 'B (Kamar Besar non AC)',
+                                        'C' => 'C (Kamar Standard non AC)',
                                     ];
                                 @endphp
 
                                 @foreach ($daftarTipe as $key => $label)
                                     <option value="{{ $key }}"
-                                        {{ old("tipe", $room->tipe ?? "") == $key ? "selected" : "" }}>
+                                        {{ old('tipe', $room->tipe ?? '') == $key ? 'selected' : '' }}>
                                         {{ $label }}
                                     </option>
                                 @endforeach
                             </select>
 
-                            @error("tipe")
+                            @error('tipe')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
@@ -70,10 +70,10 @@
                         <div class="col-lg-12 mb-3">
                             <label for="harga-6-bulan" class="form-label">Harga Sewa Per (6 Bulan) <span
                                     class="text-danger">*</span></label>
-                            <input type="number" class="form-control @error("harga_per_6_bulan") is-invalid @enderror"
-                                name="harga_per_6_bulan" value="{{ old("harga_per_6_bulan", $room->harga_per_6_bulan) }}"
+                            <input type="number" class="form-control @error('harga_per_6_bulan') is-invalid @enderror"
+                                name="harga_per_6_bulan" value="{{ old('harga_per_6_bulan', $room->harga_per_6_bulan) }}"
                                 id="harga-6-bulan" min="0" required>
-                            @error("harga_per_6_bulan")
+                            @error('harga_per_6_bulan')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
@@ -87,10 +87,10 @@
                         {{-- Kolom 1: Foto Sampul (gambar_sampul) --}}
                         <div class="col-lg-4 mb-3">
                             <label for="gambar_sampul" class="form-label">Foto 1 (Sampul)</label>
-                            <input class="form-control @error("gambar_sampul") is-invalid @enderror" type="file"
+                            <input class="form-control @error('gambar_sampul') is-invalid @enderror" type="file"
                                 name="gambar_sampul" id="gambar_sampul"
                                 onchange="previewImage('gambar_sampul', 'preview_1')" accept="image/*">
-                            @error("gambar_sampul")
+                            @error('gambar_sampul')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                             <div class="mt-2">
@@ -98,7 +98,7 @@
                                 @if ($room->gambar_sampul)
                                     <img id="preview_1" class="img-preview img-fluid"
                                         style="max-height: 100px; display: block;"
-                                        src="{{ asset("File/" . $room->gambar_sampul) }}">
+                                        src="{{ asset('File/' . $room->gambar_sampul) }}">
                                 @else
                                     <img id="preview_1" class="img-preview img-fluid"
                                         style="max-height: 100px; display: none;">
@@ -109,16 +109,16 @@
                         {{-- Kolom 2: Foto 2 (gambar_2) --}}
                         <div class="col-lg-4 mb-3">
                             <label for="gambar_2" class="form-label">Foto 2</label>
-                            <input class="form-control @error("gambar_2") is-invalid @enderror" type="file"
+                            <input class="form-control @error('gambar_2') is-invalid @enderror" type="file"
                                 name="gambar_2" id="gambar_2" onchange="previewImage('gambar_2', 'preview_2')"
                                 accept="image/*">
-                            @error("gambar_2")
+                            @error('gambar_2')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                             <div class="mt-2">
                                 {{-- Preview Gambar 2 saat ini --}}
                                 <img id="preview_2" class="img-preview img-fluid" style="max-height: 100px; display: block;"
-                                    src="{{ asset("File/" . $room->gambar_2) }}">
+                                    src="{{ asset('File/' . $room->gambar_2) }}">
                                 {{-- @if ($room->gambar_2)
                                 @else
                                     <img id="preview_2" class="img-preview img-fluid"
@@ -130,17 +130,47 @@
                         {{-- Kolom 3: Foto 3 (gambar_3) --}}
                         <div class="col-lg-4 mb-3">
                             <label for="gambar_3" class="form-label">Foto 3</label>
-                            <input class="form-control @error("gambar_3") is-invalid @enderror" type="file"
+                            <input class="form-control @error('gambar_3') is-invalid @enderror" type="file"
                                 name="gambar_3" id="gambar_3" onchange="previewImage('gambar_3', 'preview_3')"
                                 accept="image/*">
-                            @error("gambar_3")
+                            @error('gambar_3')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                             <div class="mt-2">
                                 {{-- Preview Gambar 3 saat ini --}}
                                 <img id="preview_3" class="img-preview img-fluid" style="max-height: 100px; display: block;"
-                                    src="{{ asset("File/" . $room->gambar_3) }}">
+                                    src="{{ asset('File/' . $room->gambar_3) }}">
                             </div>
+                        </div>
+                    </div>
+                    <hr>
+
+                    {{-- Row Baru: Status Ketersediaan --}}
+                    <div class="row">
+                        <div class="col-lg-12 mb-3">
+                            <label class="form-label d-block">Status Ketersediaan <span class="text-danger">*</span></label>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('is_availibe') is-invalid @enderror" type="radio"
+                                    name="is_availibe" id="status_tersedia" value="1"
+                                    {{ old('is_availibe', $room->is_availibe) == 1 ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="status_tersedia">
+                                    <span class="badge bg-success">Tersedia</span>
+                                </label>
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input @error('is_availibe') is-invalid @enderror" type="radio"
+                                    name="is_availibe" id="status_tidak_tersedia" value="0"
+                                    {{ old('is_availibe', $room->is_availibe) == 0 ? 'checked' : '' }} required>
+                                <label class="form-check-label" for="status_tidak_tersedia">
+                                    <span class="badge bg-danger">Tidak Tersedia (Dibooking)</span>
+                                </label>
+                            </div>
+
+                            @error('is_availibe')
+                                <div class="invalid-feedback d-block text-red">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
                     <hr>
@@ -150,15 +180,16 @@
                         <div class="col-lg-12 mb-3">
                             <label for="deskripsi" class="form-label">Deskripsi Kamar</label>
                             {{-- Memuat data deskripsi yang sudah ada --}}
-                            <textarea class="form-control @error("deskripsi") is-invalid @enderror" name="deskripsi" id="deskripsi" rows="5">{{ old("deskripsi", $room->deskripsi) }}</textarea>
-                            @error("deskripsi")
+                            <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi"
+                                rows="5">{{ old('deskripsi', $room->deskripsi) }}</textarea>
+                            @error('deskripsi')
                                 <div class="invalid-feedback text-red">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
 
                     {{-- Tombol Aksi --}}
-                    <a href="{{ url("room") }}" class="btn btn-warning me-2">Batal</a>
+                    <a href="{{ url('room') }}" class="btn btn-warning me-2">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                 </form>
 

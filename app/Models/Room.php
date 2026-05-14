@@ -19,6 +19,7 @@ class Room extends Model
         'gambar_2',
         'gambar_3',
         'deskripsi',
+        'is_availibe'
     ];
 
     public function booking()
